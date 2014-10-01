@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasusBelli.UI", "CasusBelli.UI\CasusBelli.UI.csproj", "{AABDF84D-D3E0-4C6C-8F2B-3CFEDC12BF0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasusBelli.Tests", "CasusBelli.Tests\CasusBelli.Tests.csproj", "{22083201-2788-4124-9C31-621FD6E904B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasusBelli.Domain", "CasusBelli.Domain\CasusBelli.Domain.csproj", "{3579374C-829F-4AA3-B110-8807EC114933}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AABDF84D-D3E0-4C6C-8F2B-3CFEDC12BF0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AABDF84D-D3E0-4C6C-8F2B-3CFEDC12BF0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AABDF84D-D3E0-4C6C-8F2B-3CFEDC12BF0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AABDF84D-D3E0-4C6C-8F2B-3CFEDC12BF0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22083201-2788-4124-9C31-621FD6E904B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22083201-2788-4124-9C31-621FD6E904B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22083201-2788-4124-9C31-621FD6E904B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22083201-2788-4124-9C31-621FD6E904B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3579374C-829F-4AA3-B110-8807EC114933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3579374C-829F-4AA3-B110-8807EC114933}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3579374C-829F-4AA3-B110-8807EC114933}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3579374C-829F-4AA3-B110-8807EC114933}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

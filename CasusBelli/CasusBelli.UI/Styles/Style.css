@@ -1,0 +1,80 @@
+﻿body {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+/*           EditFOrModel CSS              */
+
+.editor-field {
+    margin-bottom: .8em;
+}
+.editor-label {
+    font-weight: bold;
+}
+.editor-label:after {
+    content: ":";
+}
+.text-box {
+    width: 25em;
+}
+.multi-line {
+    height: 5em;
+    font-family: Segoe UI, Vernada;
+}
+
+/*           EditFOrModel CSS              */
+
+.UpperLayoutPanel {
+    height: 100px;
+    background-color: darkgrey;
+    position: relative;
+}
+
+.menu {
+    bottom: 3px;
+    right: 10px;
+    position: absolute;
+}
+
+.logo {
+    background: red;
+    height: 100%;
+    width: 10%;
+}
+
+.map {
+    background: royalblue;
+    width: 100%;
+    height: 200px;
+}
+
+.ProductType {
+    display: inline-block;
+    width: 200px; 
+    height: 200px;
+    margin: 20px;
+}
+
+.validation-summary-errors {
+    color: red;
+}
+
+.Message {
+    color: green;
+}

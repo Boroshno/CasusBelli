@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Casus Belli</title>
+    <link href="~/Styles/Style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+    <body>
+        <div class="UpperLayoutPanel">
+            <div class="logo"></div>
+            <div class="menu">
+                <ul>
+                    <li>Contacts</li>
+                    <li>FAQ</li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            @RenderBody()
+        </div>
+    </body>
+</html>

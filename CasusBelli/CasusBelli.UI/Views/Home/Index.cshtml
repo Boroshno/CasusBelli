@@ -1,0 +1,19 @@
+﻿@model IEnumerable<CasusBelli.Domain.Entities.ProductType>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/_Layout.cshtml";
+}
+
+<div class="map">
+
+</div>
+
+@foreach (var p in Model)
+{
+    <div class="ProductType">
+        @{
+            Html.RenderPartial("TypePartial", p);
+        }
+    </div>
+}

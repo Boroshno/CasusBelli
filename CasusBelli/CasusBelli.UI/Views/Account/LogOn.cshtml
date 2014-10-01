@@ -1,0 +1,16 @@
+﻿@model CasusBelli.UI.Models.LogOnViewModel
+
+@{
+    ViewBag.Title = "Admi: LogIn";
+    Layout = "~/Views/_AdminLayout.cshtml";
+}
+
+<h2>LogOn</h2>
+
+<p>Будь ласка введіть ім'я користувача та пароль</p>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.EditorForModel()
+   <p><input type="submit" value="OK"/></p>
+}

@@ -1,0 +1,36 @@
+﻿@model CasusBelli.Domain.Entities.OrderDetails
+
+@{
+    ViewBag.Title = "Order details";
+    Layout = "~/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <h2>Дані замовлення</h2>
+    <span>
+        Впишіть ваші
+        данні.Лист з
+        повідомленням буде
+        доставлена на
+        пошту
+        адміністратору.Він вам
+        відповість.
+    </span>
+    
+    <div style="display: none;">@Html.EditorFor(x => x.ProductSubType)</div>
+    if (Model.ProductSubType != null)
+     {
+         <br/><span>Ви бажаєте замовити @Model.ProductSubType.SubTypeName за @Model.ProductSubType.Price грн. Запит буде відпралено адміністратору. Будь які побажання та питання напишіть в повідомленні. ми з вами звяжемось.</span>
+     }
+
+    <div>Ім'я: @Html.EditorFor(x => x.Name)</div>
+    <div>Місто: @Html.EditorFor(x => x.City)</div>
+    <div>Нова Пошта: @Html.EditorFor(x => x.NovaPoshta)</div>
+    <div>Пошта: @Html.EditorFor(x => x.Email)</div>
+    <div>Телефон: @Html.EditorFor(x => x.Phone)</div>
+    <div>Повідомлення нам: @Html.EditorFor(x => x.Message)</div>
+    
+    <div><input type = "submit" value = "Відіслати сповіщення адміністратору"/></div>
+}
+

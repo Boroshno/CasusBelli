@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CasusBelli.Domain.Entities.ProductType>
+
+@{
+    ViewBag.Title = "Types";
+    Layout = "~/Views/_AdminLayout.cshtml";
+}
+<fieldset>
+    <h2>Types</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "CreateType")
+    </p>
+    <table border="1">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdditionalInfo)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeText)
+                </td>
+                <td>
+                    <div class="ProductType">
+                        @if (item.ImageData == null)
+                        {
+                            @:None
+                                                            }
+                        else
+                        {
+                            <img width="150" height="150" src="@Url.Action("GetImageType", "Home", new {item.TypeId})" />
+                        }
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdditionalInfo)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditType", new { id = item.TypeId }) |
+                    @Html.ActionLink("Delete", "DeleteType", new { id = item.TypeId })
+                </td>
+            </tr>
+        }
+
+
+    </table>
+</fieldset>

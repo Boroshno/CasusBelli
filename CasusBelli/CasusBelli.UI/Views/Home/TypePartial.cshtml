@@ -1,0 +1,9 @@
+﻿@model CasusBelli.Domain.Entities.ProductType
+<a href="~/ProductsList/ByType?TypeId=@Model.TypeId">
+    <div>
+        <div>
+            <img src="@Model.Photo" />
+        </div>
+        <h3>@Model.TypeName</h3>
+    </div>
+</a>
