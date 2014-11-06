@@ -1,7 +1,6 @@
 ﻿body {
     width: 60%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0px auto;
 }
 
 ul {
@@ -12,6 +11,12 @@ ul {
 
 li {
     display: inline;
+    padding: 5px;
+    cursor: pointer;
+}
+
+li:hover {
+    background: #C6D9BF;
 }
 
 img {
@@ -42,8 +47,9 @@ img {
 
 .UpperLayoutPanel {
     height: 100px;
-    background-color: darkgrey;
+    background-color: #A4B49E;
     position: relative;
+    border-bottom: black 1px solid;
 }
 
 .menu {
@@ -53,15 +59,21 @@ img {
 }
 
 .logo {
-    background: red;
+    background: url(Images/logo.png) no-repeat;
+    background-size: contain;
     height: 100%;
     width: 10%;
 }
 
 .map {
-    background: royalblue;
+    background: #A4B49E;
     width: 100%;
-    height: 200px;
+    height: 600px;
+}
+
+.country {
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .ProductType {

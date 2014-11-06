@@ -6,7 +6,19 @@
 }
 
 <div class="map">
-
+    <img class="country" src="../Styles/Images/england.png" style=" width: 138px; height: 238px; position: relative; top: 20px; left: 135px; background-size: contain;" usemap="#englandmap"></img>
+    <img class="country" src="../Styles/Images/holland.png" style=" width: 84px; height: 91px; position: relative; top: 62px; left: 191px; background-size: contain;" usemap="#hollandmap"></img>
+    <img class="country" src="../Styles/Images/germany.png" style=" width: 223px; height: 238px; position: relative; top: 167px; left: 154px; background-size: contain; " usemap="#germanymap"></img>
+    <img class="country" src="../Styles/Images/chesko.png" style=" width: 147px; height: 78px; position: relative; top: 128px; left: 71px; background-size: contain; " usemap="#cheskomap"></img>
+    <map name="englandmap">
+        <area href="/" shape="poly" coords="39,59,33,78,28,88,17,86,6,98,2,104,0,113,10,121,29,126,41,126,45,135,44,147,41,156,34,163,39,170,37,180,18,184,22,195,34,202,1,229,0,234,126,236,128,218,139,193,130,178,118,175,118,143,104,124,100,98,91,85,112,46,86,38,105,14,110,4,102,0,93,14,72,10,61,20,56,9,32,24,22,44,26,50,37,36">
+    </map>
+    <map name="hollandmap">
+        <area href="/" coords="32,17,27,34,18,43,9,52,2,58,1,69,7,71,18,69,26,67,39,73,46,77,46,82,43,86,44,90,54,91,54,86,53,82,58,77,60,67,56,57,72,53,80,41,74,35,80,31,85,16,83,9,76,2,66,0,56,0,48,0,40,3,36,8"/>
+    </map>
+    <map name="germanymap">
+        <area href="/" coords="62,28,54,34,20,40,16,46,22,50,24,62,17,74,15,90,1,95,1,108,0,126,2,142,6,142,4,150,7,160,11,169,18,178,34,182,49,185,40,200,37,219,38,229,51,229,67,226,85,230,93,233,100,237,106,233,118,234,141,229,152,227,161,231,165,232,165,221,162,210,176,202,184,196,178,183,157,167,152,161,154,154,151,145,200,126,203,131,211,117,208,108,202,100,204,90,200,81,202,75,191,66,197,58,192,38,189,30,181,22,181,14,166,11,141,22,119,29,128,17,114,16,97,13,86,5,57,0,55,8"/>
+    </map>
 </div>
 
 @foreach (var p in Model)

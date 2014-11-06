@@ -11,7 +11,7 @@ namespace CasusBelli.Domain.Concrete
 {
     public class EMailSettings
     {
-        public string mailToAddress = "darkside@e-mail.ua";
+        public string mailToAddress = "admin@casusbelli.com.ua";
         public string mailFromAddress = "admin@casusbelli.com.ua";
         public string subject = "New order";
         public string body = "";
