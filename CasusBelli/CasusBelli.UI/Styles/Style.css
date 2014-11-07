@@ -76,6 +76,18 @@ img {
     background-repeat: no-repeat;
 }
 
+.arrowlink {
+    background: url(../Styles/Images/arrow.png);
+    height: 47px;
+    width: 100px;
+    background-size: contain;
+    float: right;
+    position: relative;
+    top: -220px;
+    right: 34px;
+    cursor: pointer;
+}
+
 .ProductType {
     display: inline-block;
     width: 200px; 
