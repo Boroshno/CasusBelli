@@ -15,7 +15,6 @@ namespace CasusBelli.Domain.Entities
         [Required(ErrorMessage = "The name of type is required")]
         public string TypeName { get; set; }
         public string TypeText { get; set; }
-        [Required(ErrorMessage = "The photo address is required")]
         public string Photo { get; set; }
         [DataType(DataType.MultilineText)]
         public string AdditionalInfo { get; set; }

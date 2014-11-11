@@ -1,9 +1,35 @@
 ﻿@model CasusBelli.Domain.Entities.ProductType
-<a href="~/ProductsList/ByType?TypeId=@Model.TypeId">
-    <div>
-        <div>
-            <img src="@Model.Photo" />
-        </div>
-        <h3>@Model.TypeName</h3>
+
+    @if ((Model.TypeId%2) == 0)
+    {
+      <div>
+          <div class="typeimage" style="padding-right: 100px; float: right;">
+              <a href="~/ProductsList/ByType?TypeId=@Model.TypeId">
+                <img src=" @Model.Photo " />
+              </a>
+          </div>
+          <div style="position: relative; float: right; top: 136px; right: 100px; width: 102px; height: 50px;">
+              <a href="~/ProductsList/ByType?TypeId=@Model.TypeId">
+                  <div class="arrowlinkright"></div>
+                  <span style="color: #C6E0BC;">@Model.TypeName</span>
+              </a>
+          </div>
     </div>
+    }
+    else
+    {
+        <div>
+        <div class="typeimage" style="padding-left: 100px;">
+            <a href="~/ProductsList/ByType?TypeId=@Model.TypeId">
+                <img src="@Model.Photo" />
+            </a>
+            </div>
+        <div style="position: relative; float: right; top: -54px; right: -68px; width: 102px; height: 50px;">
+            <a href="~/ProductsList/ByType?TypeId=@Model.TypeId">
+                <div class="arrowlinkleft"></div>
+                <span style="color: #C6E0BC;">@Model.TypeName</span>
+            </a>
+            </div>
+        </div>
+    }
 </a>

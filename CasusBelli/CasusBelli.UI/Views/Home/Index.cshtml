@@ -33,11 +33,13 @@
     </map>
 </div>
 
-@foreach (var p in Model)
-{
-    <div class="ProductType">
-        @{
-            Html.RenderPartial("TypePartial", p);
-        }
-    </div>
-}
+<div style="background: #282D27;">
+    @foreach (var p in Model)
+    {
+        <div class="ProductType">
+            @{
+        Html.RenderPartial("TypePartial", p);
+            }
+        </div>
+    }
+</div>
