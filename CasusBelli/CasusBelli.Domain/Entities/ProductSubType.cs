@@ -19,7 +19,6 @@ namespace CasusBelli.Domain.Entities
         public string SubTypeName { get; set; }
         [DataType(DataType.MultilineText)]
         public string SubTypeText { get; set; }
-        [Required(ErrorMessage = "The photo of type is required")]
         public string Photo { get; set; }
         [DataType(DataType.MultilineText)]
         public string AdditionalInfo { get; set; }
@@ -29,5 +28,6 @@ namespace CasusBelli.Domain.Entities
         public byte[] ImageData { get; set; }
         [HiddenInput(DisplayValue=false)]
         public string ImageMimeData { get; set; }
+        public bool OutOfStock { get; set; }
     }
 }

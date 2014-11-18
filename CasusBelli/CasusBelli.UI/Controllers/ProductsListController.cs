@@ -16,14 +16,12 @@ namespace CasusBelli.UI.Controllers
         {
             subtypeRepository = repository;
         }
-        public ActionResult Index()
+        public ActionResult Index(int TypeId = 0, int CountryId = 0)
         {
-            return View();
-        }
-
-        public ActionResult ByType(string TypeId)
-        {
-            IEnumerable<ProductSubType> s = subtypeRepository.ProductSubTypes.ToList().Where(p => p.TypeId == Convert.ToInt32(TypeId)).ToList();
+            IEnumerable<ProductSubType> s = new List<ProductSubType>();
+            if (TypeId == 0 && CountryId == 0) { s = subtypeRepository.ProductSubTypes.ToList(); }
+            else if (TypeId != 0) { s = subtypeRepository.ProductSubTypes.ToList().Where(p => p.TypeId == Convert.ToInt32(TypeId)).ToList(); }
+            else if (CountryId != 0) { s = subtypeRepository.ProductSubTypes.ToList().Where(p => p.CountryId == Convert.ToInt32(CountryId)).ToList(); }
             return View(s);
         }
 

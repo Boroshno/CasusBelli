@@ -20,7 +20,8 @@ namespace CasusBelli.UI.Controllers
 
         public ActionResult Index()
         {
-            IEnumerable<ProductType> s = typeRepository.Types.ToList();      
+            IEnumerable<ProductType> s = typeRepository.Types.ToList();  
+    
             return View(s);
         }
 
