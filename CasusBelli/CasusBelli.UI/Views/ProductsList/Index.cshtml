@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CasusBelli.UI.Models.ProductListViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/_Layout.cshtml";
+}
+
+@foreach (var p in Model)
+{
+    <div class="ProductType">
+        <div>
+            <div>
+                <img width="150" height="150" src="@Url.Action("GetImageSubType", "Home", new {p.SubTypeId})" />
+            </div>
+            <h3>@p.SubTypeName</h3>
+            <h4>@p.Price грн.</h4>
+            <h5>@p.SubTypeText</h5>
+            @if (p.IsOutRange == false)
+            {
+                <a href="~/Order?subTypeId=@p.SubTypeId"><h3>Оформити замовлення</h3></a>
+            }
+            else
+            {
+                <h3>Товар відсутній</h3>
+            }
+        </div>
+    </div>
+}

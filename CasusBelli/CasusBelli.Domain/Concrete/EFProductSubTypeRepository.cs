@@ -12,7 +12,14 @@ namespace CasusBelli.Domain.Concrete
     public class EFProductSubTypeRepository:ISubTypeRepository
     {
         private EFDbContext context = new EFDbContext();
-        public IQueryable<ProductSubType> ProductSubTypes { get { return context.SubTypes; } }
+
+        public IQueryable<ProductSubType> ProductSubTypes
+        {
+            get
+            {
+                return context.SubTypes;
+            }
+        }
 
         public void AddOrUpdateSubType(ProductSubType productSubType)
         {

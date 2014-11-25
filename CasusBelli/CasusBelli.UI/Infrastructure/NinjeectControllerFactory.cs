@@ -41,6 +41,7 @@ namespace CasusBelli.UI.Infrastructure
             ninjectKernal.Bind<ISubTypeRepository>().To<EFProductSubTypeRepository>();
             ninjectKernal.Bind<ICountryRepository>().To<EFCountryRepository>();
             ninjectKernal.Bind<IAuthProvider>().To<FormsAuthProvider>();
+            ninjectKernal.Bind<IProductRepository>().To<EFProductRepository>();
             EMailSettings eMailSettings = new EMailSettings();
             ninjectKernal.Bind<IOrderProcessor>()
                 .To<EmailOrderProcessor>()

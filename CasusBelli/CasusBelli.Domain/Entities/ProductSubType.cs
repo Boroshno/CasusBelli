@@ -28,6 +28,5 @@ namespace CasusBelli.Domain.Entities
         public byte[] ImageData { get; set; }
         [HiddenInput(DisplayValue=false)]
         public string ImageMimeData { get; set; }
-        public bool OutOfStock { get; set; }
     }
 }

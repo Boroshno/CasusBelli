@@ -50,13 +50,5 @@ namespace CasusBelli.UI.Models
             ImageData = productSubTypes.ImageData;
             ImageMimeData = productSubTypes.ImageMimeData;
         }
-
-        //public ProductType GetProductType()
-        //{
-        //    return new ProductType
-        //    {
-        //        AdditionalInfo = A
-        //    }
-        //}
     }
 }

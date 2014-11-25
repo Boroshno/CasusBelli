@@ -13,5 +13,7 @@ namespace CasusBelli.Domain.Concrete
         public DbSet<ProductSubType> SubTypes { get; set; }
 
         public DbSet<Country> Country { get; set; }
+        public DbSet<ProductStatus> ProductStatuses { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }

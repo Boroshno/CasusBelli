@@ -137,6 +137,7 @@
     <Compile Include="Infrastructure\Concrete\FormsAuthetication.cs" />
     <Compile Include="Infrastructure\NinjeectControllerFactory.cs" />
     <Compile Include="Models\LogOnViewModel.cs" />
+    <Compile Include="Models\ProductListViewModel.cs" />
     <Compile Include="Models\SubTypesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
