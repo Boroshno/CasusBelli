@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>TypeScriptBundleTransform</id>
+    <version>1.0.0.8</version>
+    <title>TypeScript Bundle Transform</title>
+    <authors>Wouter Devinck</authors>
+    <owners>Wouter Devinck</owners>
+    <licenseUrl>https://github.com/wouterdevinck/TypeScript-BundleTransform/blob/master/license.txt</licenseUrl>
+    <projectUrl>https://github.com/wouterdevinck/TypeScript-BundleTransform/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A bundle transform for ASP.NET that takes a TypeScript bundle and compiles it to Javascript. Uses the TypeScript compiler, which is written in TypeScript and compiled to Javascript and runs it in Google's V8 Javascript Engine on your server. This is an implementation of the IBundleTransform interface, found in System.Web.Optimization.</description>
+    <summary>A bundle transform for ASP.NET that takes a TypeScript bundle and compiles it to Javascript.</summary>
+    <releaseNotes>Initial version</releaseNotes>
+    <copyright>Copyright 2012 Wouter Devinck</copyright>
+    <tags>System.Web.Optimization IBundleTransform Bundle TypeScript</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.Web.Optimization" version="1.0.0" />
+    </dependencies>
+  </metadata>
+</package>

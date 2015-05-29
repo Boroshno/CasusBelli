@@ -8,14 +8,14 @@ using CasusBelli.Domain.Entities;
 
 namespace CasusBelli.Domain.Concrete
 {
-    class EFProductStatusRepository:IProductStatusRepository
+    public class EFProductStatusRepository:IProductStatusRepository
     {
         private EFDbContext context = new EFDbContext();
         public IQueryable<ProductStatus> ProductStatuses { get { return context.ProductStatuses; }}
 
         public void AddOrUpdateProductStatus(ProductStatus ps)
         {
-            context.ProductStatuses.AddOrUpdate(p=>p.ProductStatusId, ps);
+            context.ProductStatuses.AddOrUpdate(p=>p.StatusId, ps);
             context.SaveChanges();
         }
 

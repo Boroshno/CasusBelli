@@ -11,7 +11,7 @@ namespace CasusBelli.Domain.Entities
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
-        public int ProductStatusId { get; set; }
-        public string Status { get; set; }
+        public int StatusId { get; set; }
+        public string StatusText { get; set; }
     }
 }

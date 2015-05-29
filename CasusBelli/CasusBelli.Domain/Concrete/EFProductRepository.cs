@@ -15,7 +15,24 @@ namespace CasusBelli.Domain.Concrete
 
         public void AddOrUpdateProduct(Product prod)
         {
-            context.Products.AddOrUpdate(p=>p.ProductId, prod);
+            Product efprod = new Product
+            {
+                ProductId = prod.ProductId,
+                AdditionalInfo = prod.AdditionalInfo,
+                Condition = prod.Condition,
+                Count = prod.Count,
+                CountryId = prod.CountryId,
+                NATOSize = prod.NATOSize,
+                Price = prod.Price,
+                Size = prod.Size,
+                SoldCount = prod.SoldCount,
+                SoldPrice = prod.SoldPrice,
+                TradePrice = prod.TradePrice,
+                StatusId = prod.StatusId == 0 ? 1 : prod.StatusId,
+                SubTypeId = prod.SubTypeId,
+                TypeId = prod.TypeId
+            };
+            context.Products.AddOrUpdate(p => p.ProductId, efprod);
             context.SaveChanges();
         }
 

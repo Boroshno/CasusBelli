@@ -27,10 +27,10 @@ namespace CasusBelli.UI.Controllers
             else if (CountryId != 0) { s = subtypeRepository.ProductSubTypes.ToList().Where(p => p.CountryId == Convert.ToInt32(CountryId)).ToList(); }
             List<Product> products = productRepository.Products.ToList();
             List<ProductListViewModel> prlistvm = new List<ProductListViewModel>();
-            foreach (var v in s)
-            {
-                prlistvm.Add(new ProductListViewModel(v, products.Where(p=>p.SubTypeId == v.SubTypeId).ToList()));
-            }
+            //foreach (ProductSubType v in s)
+            //{
+            //    prlistvm.Add(new ProductListViewModel(v, products.Where(p=>p.SubTypeId == v.SubTypeId).ToList()));
+            //}
             return View(prlistvm);
         }
 

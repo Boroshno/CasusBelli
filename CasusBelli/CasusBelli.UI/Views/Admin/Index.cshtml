@@ -3,4 +3,21 @@
     Layout = "~/Views/_AdminLayout.cshtml";
 }
 
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/AdminScripts.js")"></script>
+}
+
+<nav>
+    <ul>
+        <li>
+            <div id="listofproducts">List of products</div>
+        </li>
+    </ul>
+</nav>
+
+
+<p>
+    @Html.ActionLink("Add product", "Addproduct")
+</p>
 

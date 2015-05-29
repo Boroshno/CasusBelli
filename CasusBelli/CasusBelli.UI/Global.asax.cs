@@ -5,8 +5,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 using CasusBelli.Domain.Concrete;
+using CasusBelli.UI.App_Start;
 using CasusBelli.UI.Infrastructure;
 
 namespace CasusBelli.UI
@@ -22,6 +24,7 @@ namespace CasusBelli.UI
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
 

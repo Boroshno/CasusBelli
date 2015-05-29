@@ -6,7 +6,7 @@ using CasusBelli.Domain.Entities;
 
 namespace CasusBelli.Domain.Abstract
 {
-    interface IProductStatusRepository
+    public interface IProductStatusRepository
     {
         IQueryable<ProductStatus> ProductStatuses { get; }
         void AddOrUpdateProductStatus(ProductStatus ps);

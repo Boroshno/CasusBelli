@@ -2,30 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using CasusBelli.Domain.Entities;
 using CasusBelli.Domain.Abstract;
+using CasusBelli.Domain.Entities;
 
 namespace CasusBelli.UI.Models
 {
-    public class ProductListViewModel : ProductSubType
+    public class ProductListViewModel :Product
     {
         private IProductRepository prod;
 
-        public bool IsOutRange;
-
-        public ProductListViewModel(ProductSubType pst, IList<Product> p)
+        public ProductListViewModel(Product pr, IList<Product> products)
         {
-            IsOutRange = p.Where(s=>s.StatusId==1).ToList().Count > 0 ? false : true;
-            this.AdditionalInfo = pst.AdditionalInfo;
-            this.CountryId = pst.CountryId;
-            this.ImageData = pst.ImageData;
-            this.ImageMimeData = pst.ImageMimeData;
-            this.Photo = pst.Photo;
-            this.Price = pst.Price;
-            this.SubTypeId = pst.SubTypeId;
-            this.SubTypeName = pst.SubTypeName;
-            this.SubTypeText = pst.SubTypeText;
-            this.TypeId = pst.TypeId;
+            this.AdditionalInfo = pr.AdditionalInfo;
+            this.Condition = pr.Condition;
+            this.CountryId = pr.CountryId;
+            this.NATOSize = pr.NATOSize;
+            this.ProductId = pr.ProductId;
+            this.Size = pr.Size;
+            this.StatusId = pr.StatusId;
+            this.SubTypeId = pr.SubTypeId;
+            this.TradePrice = pr.TradePrice;
+            this.TypeId = pr.TypeId;
         }
     }
 }
