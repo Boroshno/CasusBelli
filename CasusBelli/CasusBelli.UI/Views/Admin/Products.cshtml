@@ -58,7 +58,8 @@
 
         @foreach (var products in subtype.GroupList.GroupBy(x => new { x.Size, x.NATOSize, x.Price, x.CountryId, x.AdditionalInfo, x.Condition, x.StatusId, x.TradePrice, x.SoldPrice }).Select(grp => new { GroupKey = grp.Key, GroupList = grp.ToList() }))
         {
-            <tr @{if (products.GroupList.First().StatusId == 3) { <text> style="background-color: red;" </text> }}>
+            <tr @{if (products.GroupList.First().StatusId == 3) { <text> style="background-color: red;" </text> }
+                  else if (products.GroupList.First().StatusId == 2) {<text> style="background-color: yellow;" </text>}}>
                 <td>
                     @Html.DisplayFor(modelItem => products.GroupList.First().TypeName)
                 </td>
@@ -84,7 +85,17 @@
                     @Html.DisplayFor(modelItem => products.GroupList.First().TradePrice)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => products.GroupList.First().Price)
+                    
+                    @{
+                        if (products.GroupList.First().StatusId == 3)
+                        {
+                            @Html.DisplayFor(modelItem => products.GroupList.First().SoldPrice);
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => products.GroupList.First().Price);
+                        }
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => products.GroupList.First().StatusName)

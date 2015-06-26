@@ -90,12 +90,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IAuthProvider.cs" />
+    <Compile Include="Abstract\IClientRepository.cs" />
     <Compile Include="Abstract\ICountryRepository.cs" />
     <Compile Include="Abstract\IOrderProcessor.cs" />
     <Compile Include="Abstract\IProductRepository.cs" />
     <Compile Include="Abstract\IProductStatusRepository.cs" />
     <Compile Include="Abstract\ISubTypeRepository.cs" />
     <Compile Include="Abstract\ITypeRepository.cs" />
+    <Compile Include="Concrete\EFClientRepository.cs" />
     <Compile Include="Concrete\EFCountryRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Concrete\EFProductTypeRepository.cs" />
     <Compile Include="Concrete\EmailOrderProcessor.cs" />
     <Compile Include="Concrete\NullableHelper.cs" />
+    <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\OrderDetails.cs" />
     <Compile Include="Entities\Product.cs" />

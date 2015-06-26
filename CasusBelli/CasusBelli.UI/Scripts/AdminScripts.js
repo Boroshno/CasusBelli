@@ -8,7 +8,7 @@
     }, 5000);
 
     $(function () {
-        $("#solddialog").dialog({
+        $(".modal-dialog").dialog({
             autoOpen: false,
             show: {
                 effect: "blind",
@@ -28,6 +28,10 @@
     $('.soldbtn').click(function () {
         $("#solddialog").dialog("open");
         $('#productid').val($(this).attr("itemid"));
+    });
+
+    $('.createbtn').click(function() {
+        $("#createdialog").dialog("open");
     });
 
     $(".tablesorter").tablesorter({ sortList: [[0, 0], [2, 1]], widgets: ['zebra'] });

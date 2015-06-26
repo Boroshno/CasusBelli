@@ -45,6 +45,7 @@ namespace CasusBelli.UI.Models
             this.availablesubtypes = availablesubtypes;
             this.Price = product.Price;
             this.Count = product.Count;
+            this.SoldPrice = product.SoldPrice;
         }
     }
 }

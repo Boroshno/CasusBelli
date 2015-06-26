@@ -22,14 +22,16 @@ namespace CasusBelli.UI.Controllers
         private ICountryRepository countryRepository;
         private IProductRepository productRepository;
         private IProductStatusRepository statusRepository;
+        private IClientRepository clientRepository;
 
-        public AdminController(ITypeRepository typeRep, ISubTypeRepository subTypeRep, ICountryRepository countryRep, IProductRepository prodRep, IProductStatusRepository prodstatusRep)
+        public AdminController(ITypeRepository typeRep, ISubTypeRepository subTypeRep, ICountryRepository countryRep, IProductRepository prodRep, IProductStatusRepository prodstatusRep, IClientRepository clientRep)
         {
             typeRepository = typeRep;
             subTypeRepository = subTypeRep;
             countryRepository = countryRep;
             productRepository = prodRep;
             statusRepository = prodstatusRep;
+            clientRepository = clientRep;
         }
 
         public ActionResult Index()
@@ -287,6 +289,40 @@ namespace CasusBelli.UI.Controllers
             {
                 newproduct.Status = "Validation of page failed. Creating new product...";
                 return View(newproduct);
+            }
+        }
+
+        public ActionResult Clients()
+        {
+            List<ClientsViewModel> clientsVM = new List<ClientsViewModel>();
+            var clients = clientRepository.Clients.ToList();
+            foreach (Client client in clients)
+            {
+                clientsVM.Add(new ClientsViewModel(client));
+            }
+
+            return View(clientsVM);
+        }
+
+        [HttpPost]
+        public ActionResult CreateClient(string name, string phone, string email, string city, string NPOffice, string additionalInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                ClientsViewModel clientVM = new ClientsViewModel();
+                clientVM.ClientId = (clientRepository.Clients.Max(x => (int?) x.ClientId) ?? 0) + 1;
+                clientVM.Name = name;
+                clientVM.Phone = phone;
+                clientVM.Email = email;
+                clientVM.City = city;
+                clientVM.NPOffice = int.Parse(NPOffice);
+                clientVM.AdditionalInfo = additionalInfo;
+                clientRepository.AddOrUpdateClient(clientVM);
+                return Redirect("/Admin/Clients");
+            }
+            else
+            {
+                return Redirect("/Admin/Clients");
             }
         }
     }
