@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CasusBelli.UI.Models.ProductSubTypesListViewModel>
+﻿@model IEnumerable<CasusBelli.UI.Models.SubTypesViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -15,7 +15,7 @@
             <h3>@p.SubTypeName</h3>
             <h4>@p.Price грн.</h4>
             <h5>@p.SubTypeText</h5>
-            @if (p.IsOutRange == false)
+            @if (p.IsOutOfRange == false)
             {
                 <a href="~/Order?subTypeId=@p.SubTypeId"><h3>Оформити замовлення</h3></a>
             }

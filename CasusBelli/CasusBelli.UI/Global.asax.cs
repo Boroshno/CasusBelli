@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
+using System.Reflection;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using CasusBelli.Domain.Abstract;
 using CasusBelli.Domain.Concrete;
-using CasusBelli.UI.App_Start;
-using CasusBelli.UI.Infrastructure;
+using CasusBelli.UI.Areas.Admin.Infrastructure;
+using CasusBelli.UI;
+using Ninject;
+using Ninject.Web.Common;
 
 namespace CasusBelli.UI
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
+
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -26,7 +27,7 @@ namespace CasusBelli.UI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
+            //ControllerBuilder.Current.SetControllerFactory(new NinjectWebCommon());
 
             Database.SetInitializer<EFDbContext>(null);
         }

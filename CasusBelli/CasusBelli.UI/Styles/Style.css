@@ -17,6 +17,7 @@ a {
 
 p a, td a {
     color: blue;
+    cursor: pointer;
 }
 
 table {
@@ -198,4 +199,5 @@ img {
 
 .createbtn {
     cursor: pointer;
+    color: blue;
 }

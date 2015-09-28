@@ -1,0 +1,94 @@
+﻿@model CasusBelli.UI.Models.SubTypesViewModel
+
+@{
+    ViewBag.Title = "CreateSubType";
+    Layout = "~/Areas/Admin/Views/_AdminLayout.cshtml";
+}
+
+<h2>CreateSubType</h2>
+
+@using (Html.BeginForm("CreateSubType", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>SubTypesViewModel</legend>
+
+        <div class="editor-label"><label for="TypeName">TypeName</label></div>
+        <div class="editor-field">
+            @Html.DropDownListFor(modelItem => Model.TypeId, new SelectList(Model.AvailableTypes, "TypeId", "TypeName"))
+        </div>
+        
+        <div class="editor-label"><label for="CountryName">CountryName</label></div>
+        <div class="editor-field">
+            @Html.DropDownListFor(modelItem => Model.CountryId, new SelectList(Model.AvailableCountries, "CountryId", "CountryName"))
+        </div>
+        
+        <div class="editor-label"><label for="Image">Image</label></div>
+        <div class="ProductType">
+            @if (Model.ImageData == null)
+            {
+                @:None
+        }
+            else
+            {
+                <img width="150" height="150" src="@Url.Action("GetImageSubType", "Home", new {Model.SubTypeId})" />
+            }
+            <div>Upload new image: <input type="file" name="Image" /></div>
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TypeId)
+            @Html.ValidationMessageFor(model => model.TypeId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SubTypeName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SubTypeName)
+            @Html.ValidationMessageFor(model => model.SubTypeName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SubTypeText)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SubTypeText)
+            @Html.ValidationMessageFor(model => model.SubTypeText)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Photo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Photo)
+            @Html.ValidationMessageFor(model => model.Photo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AdditionalInfo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AdditionalInfo)
+            @Html.ValidationMessageFor(model => model.AdditionalInfo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "SubTypes")
+</div>

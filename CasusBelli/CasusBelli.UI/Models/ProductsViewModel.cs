@@ -26,6 +26,7 @@ namespace CasusBelli.UI.Models
         public string subTypeName { get; set; }
         public string countryName { get; set; }
         public string Status { get; set; }
+        public int Count { get; set; }
 
         public ProductsViewModel()
         {
@@ -47,12 +48,10 @@ namespace CasusBelli.UI.Models
             ProductId = prod.ProductId;
             AdditionalInfo = prod.AdditionalInfo;
             Condition = prod.Condition;
-            Count = prod.Count;
             CountryId = prod.CountryId;
             NATOSize = prod.NATOSize;
             Price = prod.Price;
             Size = prod.Size;
-            SoldCount = prod.SoldCount;
             SoldPrice = prod.SoldPrice;
             TradePrice = prod.TradePrice;
             StatusId = prod.StatusId == 0 ? 1 : prod.StatusId;

@@ -1,0 +1,76 @@
+﻿@model IEnumerable<CasusBelli.UI.Models.TransactionsViewModel>
+
+
+@{
+    ViewBag.Title = "Transactions";
+    Layout = "~/Areas/Admin/Views/_AdminLayout.cshtml";
+}
+
+<fieldset>
+    <h2>Transactions</h2>
+
+    <p>
+        <text><a class="createbtn">Create new</a></text>
+    </p>
+
+    <table border="1">
+        <th>
+            @Html.DisplayNameFor(model => model.Text)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WasMoney)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Currency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BecameMoney)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.clientName)
+        </th>
+        <th></th>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WasMoney)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Currency)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BecameMoney)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.clientName)
+                </td>
+            </tr>
+        }
+    </table>
+</fieldset>
+
+<div id="createdialog" title="Create transaction" class="modal-dialog">
+    <form action="/Admin/CreateTransaction" method="POST">
+        Text <br />
+        <input type="text" name="text" /> <br />
+        Currency <br />
+        <input type="text" name="currency" /><br />
+
+        <div class="editor-label"><label for="ClientName">ClientName</label></div>
+        <div class="editor-field">
+            @Html.DropDownListFor(modelItem => Model.First().ClientId, new SelectList(Model.First().availableClients, "ClientId", "Name", -1))
+        </div>
+        <button>Create</button>
+    </form>
+</div>

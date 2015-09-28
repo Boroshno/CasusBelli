@@ -96,6 +96,7 @@
     <Compile Include="Abstract\IProductRepository.cs" />
     <Compile Include="Abstract\IProductStatusRepository.cs" />
     <Compile Include="Abstract\ISubTypeRepository.cs" />
+    <Compile Include="Abstract\ITransactionRepository.cs" />
     <Compile Include="Abstract\ITypeRepository.cs" />
     <Compile Include="Concrete\EFClientRepository.cs" />
     <Compile Include="Concrete\EFCountryRepository.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Concrete\EFProductStatusRepository.cs" />
     <Compile Include="Concrete\EFProductSubTypeRepository.cs" />
     <Compile Include="Concrete\EFProductTypeRepository.cs" />
+    <Compile Include="Concrete\EFTransactionRepository.cs" />
     <Compile Include="Concrete\EmailOrderProcessor.cs" />
     <Compile Include="Concrete\NullableHelper.cs" />
     <Compile Include="Entities\Client.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="Entities\ProductStatus.cs" />
     <Compile Include="Entities\ProductSubType.cs" />
     <Compile Include="Entities\ProductType.cs" />
+    <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

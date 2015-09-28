@@ -12,15 +12,19 @@ namespace CasusBelli.UI.Models
         public string SubTypeName { get; set; }
         public string CountryName { get; set; }
         public string StatusName { get; set; }
+        public int Count { get; set; }
+        public int ClientId { get; set; }
 
         IList<ProductType> availableTypes { get; set; }
         IList<Country> availableCountries { get; set; }
         IList<ProductSubType> availablesubtypes { get; set; }
         IList<ProductStatus> availablestatuses { get; set; }
 
+        public IList<Client> availableclients { get; set; } 
+
         public AdminProductsListViewModel(Product product, IList<ProductType> availableTypes,
             IList<Country> availableCountries, IList<ProductSubType> availablesubtypes,
-            IList<ProductStatus> availablestatuses)
+            IList<ProductStatus> availablestatuses, IList<Client> availableclients)
         {
             this.AdditionalInfo = product.AdditionalInfo;
             this.Condition = product.Condition;
@@ -43,8 +47,8 @@ namespace CasusBelli.UI.Models
             this.availableTypes = availableTypes;
             this.availablestatuses = availablestatuses;
             this.availablesubtypes = availablesubtypes;
+            this.availableclients = availableclients;
             this.Price = product.Price;
-            this.Count = product.Count;
             this.SoldPrice = product.SoldPrice;
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace CasusBelli.UI.App_Start
+namespace CasusBelli.UI
 {
     public class BundleConfig
     {

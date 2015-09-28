@@ -31,10 +31,8 @@ namespace CasusBelli.Domain.Entities
         [DataType(DataType.MultilineText)]
         public string AdditionalInfo { get; set; }
         public int TradePrice { get; set; }
-        public int Count { get; set; }
         public int Price { get; set; }
         public int SoldPrice { get; set; }
-        public int SoldCount { get; set; }
 
     }
 }
