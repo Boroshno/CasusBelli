@@ -14,4 +14,11 @@ namespace CasusBelli.Domain.Entities
         public int StatusId { get; set; }
         public string StatusText { get; set; }
     }
+
+    public enum ProductStatusEnum
+    {
+        Available =1,
+        Reserved = 2,
+        Sold = 3
+    }
 }

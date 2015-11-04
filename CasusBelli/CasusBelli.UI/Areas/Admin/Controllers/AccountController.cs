@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using CasusBelli.Domain.Abstract;
 using CasusBelli.UI.Models;
 
-namespace CasusBelli.UI.Controllers
+namespace CasusBelli.UI.Areas.Admin.Controllers
 {
     public class AccountController : Controller
     {

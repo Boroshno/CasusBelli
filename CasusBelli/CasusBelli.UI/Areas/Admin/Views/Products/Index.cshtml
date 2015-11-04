@@ -1,4 +1,5 @@
 ﻿@using System.CodeDom
+@using CasusBelli.Domain.Entities
 @using Microsoft.Ajax.Utilities
 @model List<CasusBelli.UI.Models.AdminProductsListViewModel>
 
@@ -60,7 +61,8 @@
 
             @foreach (var products in subtype.GroupList.GroupBy(x => new { x.Size, x.NATOSize, x.Price, x.CountryId, x.AdditionalInfo, x.Condition, x.StatusId, x.TradePrice, x.SoldPrice }).Select(grp => new { GroupKey = grp.Key, GroupList = grp.ToList() }))
             {
-                <tr @{if (products.GroupList.First().StatusId == 3) { <text> style="background-color: red;" </text>  } else if (products.GroupList.First().StatusId == 2) { <text> style="background-color: yellow;" </text> }}>
+                <tr @{if (products.GroupList.First().StatusId == (int)ProductStatusEnum.Sold)
+                      { <text> style="background-color: red;" </text>  } else if (products.GroupList.First().StatusId == (int)ProductStatusEnum.Reserved) { <text> style="background-color: yellow;" </text> }}>
                     <td>
                         @Html.DisplayFor(modelItem => products.GroupList.First().TypeName)
                     </td>

@@ -8,7 +8,7 @@
 <h2>CreateProduct</h2>
 <h3 class="status" style="color:red;">@Model.Status</h3>
 
-@using (Html.BeginForm("CreateProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("CreateProduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)

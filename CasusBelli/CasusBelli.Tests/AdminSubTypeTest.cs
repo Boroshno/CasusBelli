@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using CasusBelli.Domain.Entities;
 using CasusBelli.UI.Areas.Admin.Controllers;
+using CasusBelli.UI.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using CasusBelli.Domain.Abstract;
@@ -17,6 +18,7 @@ namespace CasusBelli.Tests
     [TestClass]
     public class AdminSubTypeTest
     {
+        public FileStream _stream;
         private Mock<ITypeRepository> mockType;
         private Mock<ISubTypeRepository> mockSubType;
         private Mock<ICountryRepository> mockCountry;
@@ -25,6 +27,9 @@ namespace CasusBelli.Tests
         [TestInitialize]
         public void SetUp()
         {
+            _stream = new FileStream(Path.GetFullPath(@"testfiles\Lenin.jpg"),
+                         FileMode.Open);
+
             mockType = new Mock<ITypeRepository>();
             mockType.Setup(m => m.Types).Returns(new ProductType[]
             {
@@ -94,6 +99,79 @@ namespace CasusBelli.Tests
             Assert.AreEqual(st1.SubTypeName, "Big");
             Assert.AreEqual(st1.SubTypeId, 1);
             Assert.AreEqual(st2.SubTypeId, 2);
+        }
+
+        [TestMethod]
+        public void CanCreateNewSubType()
+        {
+            //Arrange
+            var file = new Mock<HttpPostedFileBase>();
+            file.Setup(x => x.InputStream).Returns(_stream);
+            file.Setup(x => x.ContentLength).Returns((int)_stream.Length);
+            file.Setup(x => x.FileName).Returns(_stream.Name);
+            SubTypesController target = new SubTypesController(mockSubType.Object, mockType.Object, mockCountry.Object, mockProduct.Object);
+            SubTypesController target2 = new SubTypesController(mockSubType.Object, mockType.Object, mockCountry.Object, mockProduct.Object);
+            SubTypesViewModel st1 = new SubTypesViewModel() { AdditionalInfo = "Test", SubTypeName = "English boot", TypeId = 1, CountryId = 1 };
+
+            //Action
+            target.CreateSubType(st1, file.Object);
+            target2.ModelState.AddModelError("error", new ValidationException());
+            target2.CreateSubType(st1, file.Object);
+
+            //Assert
+            mockSubType.Verify(o => o.AddOrUpdateSubType(st1), Times.Exactly(1));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(HttpException),"Such subtype doesnt exist")]
+        public void CanEditSubType()
+        {
+            //Arrange
+            var file = new Mock<HttpPostedFileBase>();
+            file.Setup(x => x.InputStream).Returns(_stream);
+            file.Setup(x => x.ContentLength).Returns((int)_stream.Length);
+            file.Setup(x => x.FileName).Returns(_stream.Name);
+            SubTypesController target = new SubTypesController(mockSubType.Object, mockType.Object, mockCountry.Object, mockProduct.Object);
+            SubTypesController target2 = new SubTypesController(mockSubType.Object, mockType.Object, mockCountry.Object, mockProduct.Object);
+            SubTypesViewModel st1 = new SubTypesViewModel() { AdditionalInfo = "Test", SubTypeName = "English boot", TypeId = 1, CountryId = 1, SubTypeId = 0 };
+            SubTypesViewModel st2 = new SubTypesViewModel() { AdditionalInfo = "Test", SubTypeName = "English coat", TypeId = 2, CountryId = 1, SubTypeId = 2};
+
+            //Action
+            target.EditSubType(st1, file.Object);
+            target.EditSubType(st2, file.Object);
+            target2.ModelState.AddModelError("error", new ValidationException());
+            target2.EditSubType(st1, file.Object);
+
+            //Assert
+            mockSubType.Verify(o => o.AddOrUpdateSubType(st1), Times.Never);
+            mockSubType.Verify(o => o.AddOrUpdateSubType(st2), Times.Once);
+        }
+
+        [TestMethod]
+        public void CanDeleteSubType()
+        {
+            //Arrange
+            SubTypesViewModel st = new SubTypesViewModel() { AdditionalInfo = "Test", SubTypeName = "English coat", TypeId = 2, CountryId = 1, SubTypeId = 3 };
+            mockSubType = new Mock<ISubTypeRepository>();
+            mockSubType.Setup(m => m.ProductSubTypes).Returns(new ProductSubType[]
+            {
+                new ProductSubType() { SubTypeName = "Big", TypeId = 1, SubTypeText = "MyBootsBig", SubTypeId = 1, CountryId = 1},
+                new ProductSubType() { SubTypeName = "Little", TypeId = 1, SubTypeText = "MyBootsBigLittle", SubTypeId = 2, CountryId = 1},
+                st
+            }.AsQueryable());
+            SubTypesController target = new SubTypesController(mockSubType.Object, mockType.Object, mockCountry.Object, mockProduct.Object);
+
+            //Action
+            target.DeleteSubType(st.SubTypeId);
+
+            //Assert
+            mockSubType.Verify(o => o.DeleteSubType(st), Times.Once);
+        }
+
+        [TestCleanup]
+        public void OnCleanup()
+        {
+            _stream.Close();
         }
     }
 }

@@ -60,22 +60,31 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult EditSubType(SubTypesViewModel subTypesViewModel, HttpPostedFileBase image)
         {
-            if (ModelState.IsValid)
+            try
             {
-                if (image != null)
+                if (ModelState.IsValid &&
+                    subTypeRepository.ProductSubTypes.First(p => p.SubTypeId == subTypesViewModel.SubTypeId) != null)
                 {
-                    subTypesViewModel.ImageMimeData = image.ContentType;
-                    byte[] bt = new byte[image.ContentLength];
-                    image.InputStream.Read(bt, 0, image.ContentLength);
-                    subTypesViewModel.ImageData = bt;//NullableHelper.ConvertArray(bt);
+                    if (image != null)
+                    {
+                        subTypesViewModel.ImageMimeData = image.ContentType;
+                        byte[] bt = new byte[image.ContentLength];
+                        image.InputStream.Read(bt, 0, image.ContentLength);
+                        subTypesViewModel.ImageData = bt; //NullableHelper.ConvertArray(bt);
+                    }
+                    subTypeRepository.AddOrUpdateSubType(subTypesViewModel);
+                    TempData["message"] = string.Format("Зміни підтипу до {0} було збережено",
+                        subTypesViewModel.SubTypeName);
+                    return RedirectToAction("Index");
                 }
-                subTypeRepository.AddOrUpdateSubType(subTypesViewModel);
-                TempData["message"] = string.Format("Зміни підтипу до {0} було збережено", subTypesViewModel.SubTypeName);
-                return RedirectToAction("Index");
+                else
+                {
+                    return View(subTypesViewModel);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return View(subTypesViewModel);
+                throw new HttpException(404, "Such subtype doesnt exist");
             }
         }
 

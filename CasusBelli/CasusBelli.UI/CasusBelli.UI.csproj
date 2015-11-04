@@ -52,6 +52,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
@@ -67,6 +70,12 @@
     </Reference>
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net40-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorGenerator.Mvc">
+      <HintPath>..\packages\RazorGenerator.Mvc.2.3.12\lib\net40\RazorGenerator.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="ReflectionMagic">
+      <HintPath>..\packages\ReflectionMagic.2.0.3\lib\net40\ReflectionMagic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -146,6 +155,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="Areas\Admin\Controllers\ClientsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
@@ -228,7 +238,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Admin\Views\SubTypes\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+    </Content>
     <Content Include="Areas\Admin\Views\Clients\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Transactions\Index.cshtml" />
     <None Include="Areas\Admin\Views\Web.Debug.config">

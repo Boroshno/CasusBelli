@@ -34,7 +34,7 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
             transactionRepository = tranRep;
         }
 
-        public ActionResult Index()
+        public ViewResult Index()
         {
             List<AdminProductsListViewModel> productsVM = new List<AdminProductsListViewModel>();
             var types = typeRepository.Types.ToList();
@@ -114,7 +114,7 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
 
         public ActionResult DeleteProduct(int id)
         {
-            Product product = productRepository.Products.First(p => p.SubTypeId == id);
+            Product product = productRepository.Products.First(p => p.ProductId == id);
             productRepository.DeleteProduct(product);
             return RedirectToAction("Index");
         }
@@ -143,9 +143,9 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
                 //Transaction lasttrans = transactionRepository.transactions.OrderByDescending(t => t.Date).First();
                 //Transaction newtran = new Transaction
                 //{
-                //    BecameMoney = lasttrans.BecameMoney + (newproduct.TradePrice*newproduct.Count),                        // Uncomment it it when all products will be in DB
+                //    BecameMoney = lasttrans.BecameMoney + (newproduct.TradePrice * newproduct.Count),                        // Uncomment it it when all products will be in DB
                 //    ClientId = -1,
-                //    Currency = newproduct.TradePrice*newproduct.Count,
+                //    Currency = newproduct.TradePrice * newproduct.Count,
                 //    Date = DateTime.Now,
                 //    WasMoney = lasttrans.BecameMoney,
                 //    Text = "Закупка " + newproduct.subTypeName
