@@ -33,6 +33,7 @@
             @Html.DisplayNameFor(model => model.AdditionalInfo)
         </th>
         <th></th>
+        <th></th>
 
         @foreach (var item in Model)
         {
@@ -56,6 +57,9 @@
                     @Html.DisplayFor(modelItem => item.AdditionalInfo)
                 </td>
                 <td>
+                    <text><a class="editbtn" id="@item.ClientId">Edit</a></text>
+                </td>
+                <td>
                     @Html.ActionLink("Delete", "DeleteClient", new { id = item.ClientId })
                 </td>
             </tr>
@@ -65,7 +69,7 @@
 </fieldset>
 
 <div id="createdialog" title="Create client" class="modal-dialog">
-    <form action="/Admin/CreateClient" method="POST">
+    <form action="/Admin/Clients/CreateClient" method="POST">
         Name <br />
         <input type="text" name="name" id="Name" /> <br />
         Phone <br />
@@ -77,26 +81,62 @@
         NPOffice <br />
         <input type="text" name="NPOffice" id="NPOffice" /><br />
         Additional Info <br />
-        <input type="text" name="addiotionalInfo" id="AddiotionalInfo" /><br />
+        <input type="text" name="AdditionalInfo" id="AdditionalInfo" /><br />
         <button>Create</button>
+    </form>
+</div>
+
+<div id="editdialog" title="Edit client" class="modal-dialog">
+    <form action="/Admin/Clients/EditClient" method="POST">
+        <input type="hidden" name="clientId" id="EditId" />
+        Name <br />
+        <input type="text" name="name" id="EditName" /> <br />
+        Phone <br />
+        <input type="text" name="phone" id="EditPhone" /><br />
+        Email <br />
+        <input type="text" name="email" id="EditEmail" /><br />
+        City <br />
+        <input type="text" name="city" id="EditCity" /><br />
+        NPOffice <br />
+        <input type="text" name="NPOffice" id="EditNPOffice" /><br />
+        Additional Info <br />
+        <input type="text" name="AdditionalInfo" id="EditAdditionalInfo" /><br />
+        <button>Save</button>
     </form>
 </div>
 
 <script type="text/jscript">
     $('.createclientpost').click(function () {
-        var url = "/Admin/CreateClient";
+        var url = "/Admin/Clients/CreateClient";
         var name = $("#Name").val();
         var phone = $("#Phone").val();
         var email = $('#Email').val();
         var city = $('#City').val();
-        var npoffice = $('#NPOffce').val();
+        var npoffice = $('#NPOffice').val();
         var additionalInfo = $('#AddiotionalInfo').val();
         $.post(url, { Name: name, Address: address }, function (data) {
             $("#msg").html(data);
         });
     })
+    
+
 
     $('.createbtn').click(function () {
         $("#createdialog").dialog("open");
+    });
+    
+    $('.editbtn').click(function () {
+        var thisId = $(this).attr("id");
+        $.get("/Admin/Clients/GetClientById", {id:thisId}, function (data) {
+            var client = $.parseJSON(data);
+            $('#EditId').val(client.ClientId);
+            $("#EditName").val(client.Name);
+            $("#EditPhone").val(client.Phone);
+            $("#EditEmail").val(client.Email);
+            $("#EditCity").val(client.City);
+            $("#EditNPOffice").val(client.NPOffice);
+            $("#EditAdditionalInfo").val(client.AddiotionalInfo);
+        })
+        $("#editdialog").dialog("open");
     });
 </script>

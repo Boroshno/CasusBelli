@@ -8,7 +8,9 @@ namespace CasusBelli.Domain.Abstract
 {
     public  interface ITransactionRepository
     {
-        IQueryable<Transaction> transactions { get; }
+        IEnumerable<Transaction> transactions { get; }
         void AddTransaction(Transaction transaction);
+
+        void DeleteTransaction(Transaction transaction);
     }
 }

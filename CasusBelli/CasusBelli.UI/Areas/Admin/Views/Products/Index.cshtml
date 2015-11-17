@@ -106,7 +106,7 @@
                     <td>
                         @{if (products.GroupList.First().StatusId != 3)
                         {<text>
-                            <a class="soldbtn" itemid="@products.GroupList.First().ProductId">Sold</a>
+                            <a class="soldbtn" itemid="@products.GroupList.First().ProductId">Sell</a>
                         </text>}}
                     </td>
                     <td>
@@ -122,8 +122,8 @@
     }
 }
 
-<div id="solddialog" title="Sold panel" class="modal-dialog">
-    <form action="/Admin/SoldProduct" method="POST">
+<div id="solddialog" title="Sell panel" class="modal-dialog">
+    <form action="/Admin/SellProduct" method="POST">
         <input type="hidden" name="productid" value="" id="productid" />
         Sold price <br />
         <input type="text" name="price" /> <br />

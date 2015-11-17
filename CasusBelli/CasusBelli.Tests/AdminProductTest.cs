@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using CasusBelli.Domain.Abstract;
 using CasusBelli.Domain.Entities;
@@ -12,6 +13,7 @@ using HtmlAgilityPack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RazorGenerator.Testing;
+using ReflectionMagic;
 
 namespace CasusBelli.Tests
 {
@@ -111,6 +113,33 @@ namespace CasusBelli.Tests
         }
 
         [TestMethod]
+        public void WasTransactionCreatedWithNewProduct()
+        {
+            //Arrange
+            ProductsController prodC1 = new ProductsController(mockType.Object, mockSubType.Object, mockCountry.Object, mockProduct.Object, mockStatus.Object, mockClient.Object, mockTransaction.Object);
+            ProductsViewModel prodVM = new ProductsViewModel() { CountryId = 1, SubTypeId = 1, TypeId = 1, Price = 300, ProductId = 22, StatusId = 1, TradePrice = 400, Count = 1 };
+
+            //Action
+            prodC1.CreateProduct(prodVM);
+            Transaction lasttrans = mockTransaction.Object.transactions.OrderByDescending(t => t.Date).First();
+            Transaction newtran = new Transaction
+            {
+                BecameMoney = lasttrans.BecameMoney + (prodVM.TradePrice * prodVM.Count),
+                ClientId = -1,
+                Currency = prodVM.TradePrice * prodVM.Count,
+                Date = DateTime.Now,
+                WasMoney = lasttrans.BecameMoney,
+                Text = "Закупка " + prodVM.subTypeName
+            };
+
+            //Assert
+           mockTransaction.Verify(m=>m.AddTransaction(It.IsAny<Transaction>()), Times.Once);
+           mockTransaction.Verify(m => m.AddTransaction(It.Is<Transaction>(tran => tran.ClientId == -1)));
+           mockTransaction.Verify(m => m.AddTransaction(It.Is<Transaction>(tran => tran.Currency == newtran.Currency)));
+           mockTransaction.Verify(m => m.AddTransaction(It.Is<Transaction>(tran => tran.Text.StartsWith("Закупка")))); 
+        }
+
+        [TestMethod]
         public void CanDeleteProduct()
         {
             //Arrange
@@ -124,13 +153,72 @@ namespace CasusBelli.Tests
             }.AsQueryable());
             ProductsController prodC1 = new ProductsController(mockType.Object, mockSubType.Object, mockCountry.Object, mockProduct.Object, mockStatus.Object, mockClient.Object, mockTransaction.Object);
             
-
             //Action
             prodC1.DeleteProduct(prod.ProductId);
             
-
             //Assert
             mockProduct.Verify(m=>m.DeleteProduct(prod), Times.Once);
+        }
+
+        [TestMethod]
+        public void CanSellOneProduct()
+        {
+            //Arrange
+            Product prod = new Product() { CountryId = 1, SubTypeId = 1, TypeId = 1, Price = 300, ProductId = 22, StatusId = 1, TradePrice = 400 };
+            mockProduct = new Mock<IProductRepository>();
+            mockProduct.Setup((m => m.Products)).Returns(new Product[]
+            {
+              new Product() {CountryId = 1, SubTypeId = 1, TypeId = 1, Price = 200, ProductId = 1, StatusId = 1, TradePrice = 100},
+              new Product() {CountryId = 1, SubTypeId = 1, TypeId = 1, Price = 200, ProductId = 2, StatusId = 1, TradePrice = 100},
+              prod
+            }.AsQueryable());
+            ProductsController prodC = new ProductsController(mockType.Object, mockSubType.Object, mockCountry.Object, mockProduct.Object, mockStatus.Object, mockClient.Object, mockTransaction.Object);
+
+            //Action
+            prodC.SellProduct(prod.ProductId, 300, 1, -1);
+
+            //Assert
+            mockProduct.Verify(m => m.AddOrUpdateProduct(It.IsAny<Product>()), Times.Once);
+            mockProduct.Verify(m => m.AddOrUpdateProduct(It.Is<Product>(p=>p.ProductId == prod.ProductId)));
+            mockProduct.Verify(m => m.AddOrUpdateProduct(It.Is<Product>(p => p.StatusId == (int)ProductStatusEnum.Sold)));
+            mockProduct.Verify(m => m.AddOrUpdateProduct(It.Is<Product>(p => p.SoldPrice == 300)));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(HttpException), "There are is no enought products to sold them.")]
+        public void CanSellALotOfProducts()
+        {
+            //Arrange
+            Product prod1 = new Product() { CountryId = 1, SubTypeId = 1, TypeId = 1, Price = 300, ProductId = 22, StatusId = 1, TradePrice = 400 };
+            Product prod2 = new Product() { CountryId = 1, SubTypeId = 1, TypeId = 1, Price = 300, ProductId = 23, StatusId = 1, TradePrice = 400 };
+            Product prod3 = new Product() { CountryId = 1, SubTypeId = 1, TypeId = 1, Price = 300, ProductId = 24, StatusId = 1, TradePrice = 400 };
+            mockProduct = new Mock<IProductRepository>();
+            mockProduct.Setup((m => m.Products)).Returns(new Product[]
+            {
+              new Product() {CountryId = 1, SubTypeId = 1, TypeId = 1, Price = 200, ProductId = 1, StatusId = 1, TradePrice = 100},
+              new Product() {CountryId = 1, SubTypeId = 1, TypeId = 1, Price = 200, ProductId = 2, StatusId = 1, TradePrice = 100},
+              prod1,
+              prod2,
+              prod3
+            }.AsQueryable());
+            ProductsController prodC = new ProductsController(mockType.Object, mockSubType.Object, mockCountry.Object, mockProduct.Object, mockStatus.Object, mockClient.Object, mockTransaction.Object);
+            ProductsController prodC2 = new ProductsController(mockType.Object, mockSubType.Object, mockCountry.Object, mockProduct.Object, mockStatus.Object, mockClient.Object, mockTransaction.Object);
+
+            //Action
+            prodC.SellProduct(prod1.ProductId, 300, 3, -1);
+            prodC2.SellProduct(prod1.ProductId, 300, 4, -1);
+
+            //Assert
+            mockProduct.Verify(m => m.AddOrUpdateProduct(It.IsAny<Product>()), Times.Exactly(3));
+            mockProduct.Verify(m => m.AddOrUpdateProduct(It.Is<Product>(p => p.StatusId == (int)ProductStatusEnum.Sold)));
+            mockProduct.Verify(m => m.AddOrUpdateProduct(It.Is<Product>(p => p.SoldPrice == 300)));
+
+            //Assert Transactions
+            mockTransaction.Verify(m => m.AddTransaction(It.IsAny<Transaction>()), Times.Once);
+            mockTransaction.Verify(m => m.AddTransaction(It.Is<Transaction>(tran => tran.ClientId == -1)));
+            mockTransaction.Verify(m => m.AddTransaction(It.Is<Transaction>(tran => tran.Currency == 300)));
+            mockTransaction.Verify(m => m.AddTransaction(It.Is<Transaction>(tran => tran.Text.StartsWith("Продано")))); 
+
         }
     }
 }

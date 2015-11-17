@@ -8,7 +8,7 @@ namespace CasusBelli.Domain.Abstract
 {
     public interface IProductRepository
     {
-        IQueryable<Product> Products { get; }
+        IEnumerable<Product> Products { get; }
         void AddOrUpdateProduct(Product prod);
         void DeleteProduct(Product prod);
     }

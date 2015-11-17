@@ -8,7 +8,7 @@ namespace CasusBelli.Domain.Abstract
 {
     public interface ITypeRepository
     {
-        IQueryable<ProductType> Types { get; }
+        IEnumerable<ProductType> Types { get; }
 
         void AddOrUpdateType(ProductType productType);
 

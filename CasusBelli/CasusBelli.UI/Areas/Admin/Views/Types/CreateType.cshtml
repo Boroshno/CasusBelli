@@ -7,7 +7,7 @@
 
 <h2>CreateType</h2>
 
-@using (Html.BeginForm("CreateType", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("CreateType", "Types", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -23,9 +23,9 @@
             @Html.ValidationMessageFor(model => model.TypeName)
         </div>
         
-        <div class="editor-label"><label for="CountryName">Image</label></div>
+        <div class="editor-label"><label for="Photo">Image</label></div>
         <div class="ProductType">
-            @if (Model.ImageData == null)
+            @*@if (Model.ImageData == null)
             {
                 @:None
         }
@@ -33,7 +33,12 @@
             {
                 <img width="150" height="150" src="@Url.Action("GetImageType", "Image", new { Model.TypeId })" />
             }
-            <div>Upload new image: <input type="file" name="Image" /></div>
+            <div>Upload new image: <input type="file" name="Image" /></div>*@
+            <img width="150" height="150" src="@Model.Photo" />
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Photo)
+                @Html.ValidationMessageFor(model => model.Photo)
+            </div>
         </div>
 
         <div class="editor-label">

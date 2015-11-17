@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using CasusBelli.Domain.Abstract;
@@ -9,8 +10,34 @@ namespace CasusBelli.Domain.Concrete
 {
     public class EFTransactionRepository:ITransactionRepository
     {
+        public EFTransactionRepository() : this(new DefaultCasheProvider())
+        {
+            
+        }
+
+        public EFTransactionRepository(ICacheProvider cacheProvider)
+        {
+            this.Cache = cacheProvider;
+        }
         private EFDbContext context = new EFDbContext();
-        public IQueryable<Transaction> transactions { get { return context.Transactions; } }
+        public ICacheProvider Cache { get; set; }
+
+        public IEnumerable<Transaction> transactions
+        {
+            get
+            {
+                List<Transaction> transactionsData = Cache.Get("transactions") as List<Transaction>;
+                if (transactionsData == null)
+                {
+                    transactionsData = context.Transactions.SqlQuery("SELECT * FROM Transactions").ToList(); 
+                    if (transactionsData.Any())
+                    {
+                        Cache.Set("transactions", transactionsData, 99999);
+                    }
+                }
+                return transactionsData;
+            }
+        }
 
         public void AddTransaction(Transaction transaction)
         {
@@ -23,6 +50,22 @@ namespace CasusBelli.Domain.Concrete
             newTran.WasMoney = transaction.WasMoney;
             context.Transactions.Add(newTran);
             context.SaveChanges();
+
+            ClearCache();
+        }
+
+
+        public void DeleteTransaction(Transaction transaction)
+        {
+            context.Transactions.Remove(transaction);
+            context.SaveChanges();
+
+            ClearCache();
+        }
+
+        public void ClearCache()
+        {
+            Cache.Invalidate("clients");
         }
     }
 }

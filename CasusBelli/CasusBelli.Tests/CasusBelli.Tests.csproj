@@ -120,8 +120,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminClientTest.cs" />
     <Compile Include="AdminProductTest.cs" />
     <Compile Include="AdminSubTypeTest.cs" />
+    <Compile Include="AdminTransactionTest.cs" />
     <Compile Include="AdminTypesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

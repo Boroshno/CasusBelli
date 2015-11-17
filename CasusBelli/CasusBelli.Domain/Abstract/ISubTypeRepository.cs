@@ -8,7 +8,7 @@ namespace CasusBelli.Domain.Abstract
 {
     public interface ISubTypeRepository
     {
-        IQueryable<ProductSubType> ProductSubTypes { get; }
+        IEnumerable<ProductSubType> ProductSubTypes { get; }
 
         void AddOrUpdateSubType(ProductSubType productSubType);
 

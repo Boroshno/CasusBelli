@@ -42,14 +42,15 @@
                 </td>
                 <td>
                     <div class="ProductType">
-                        @if (item.ImageData == null)
+                        @*@if (item.ImageData == null)
                         {
                             @:None
                                     }
                         else
                         {
                             <img width="150" height="150" src="@Url.Action("GetImageSubType", "Image", new {item.SubTypeId})" />
-                        }
+                        }*@
+                        <img width="150" height="150" src="@item.Photo" />
                     </div>
                 </td>
                 <td>

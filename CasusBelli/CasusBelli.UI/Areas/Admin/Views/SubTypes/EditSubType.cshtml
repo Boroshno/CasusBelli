@@ -9,7 +9,7 @@
 
 <h1>@Model.SubTypeName</h1>
 
-@using (Html.BeginForm("EditSubType", "Admin", FormMethod.Post, new {enctype = "multipart/form-data"}))
+@using (Html.BeginForm("EditSubType", "SubTypes", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
 
     <div class="editor-label"><label for="TypeName">TypeName</label></div>
@@ -24,7 +24,7 @@
     
     <div class="editor-label"><label for="CountryName">Image</label></div>
     <div class="ProductType">
-        @if (Model.ImageData == null)
+        @*@if (Model.ImageData == null)
         {
             @:None
         }
@@ -32,7 +32,7 @@
         {
             <img width="150" height="150" src="@Url.Action("GetImageSubType", "Image", new {Model.SubTypeId})"/>
         }
-        <div>Upload new image: <input type="file" name="Image"/></div>
+        <div>Upload new image: <input type="file" name="Image"/></div>*@
     </div>
     
     @Html.EditorForModel()

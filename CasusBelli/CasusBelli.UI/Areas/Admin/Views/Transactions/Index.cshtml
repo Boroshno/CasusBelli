@@ -33,6 +33,7 @@
             @Html.DisplayNameFor(model => model.clientName)
         </th>
         <th></th>
+        <th></th>
 
         @foreach (var item in Model)
         {
@@ -55,13 +56,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.clientName)
                 </td>
+                <td>
+                    @if (Model.Last() == item)
+                    {
+                        <text><a class="deletebtn" id="@item.TransactionId">Delete</a></text>
+                    }
+                </td>
             </tr>
         }
     </table>
 </fieldset>
 
 <div id="createdialog" title="Create transaction" class="modal-dialog">
-    <form action="/Admin/CreateTransaction" method="POST">
+    <form action="/Admin/Transactions/CreateTransaction" method="POST">
         Text <br />
         <input type="text" name="text" /> <br />
         Currency <br />
@@ -74,3 +81,34 @@
         <button>Create</button>
     </form>
 </div>
+
+<div id="dialog-confirm"></div>
+
+<script type="text/jscript">
+    $('.deletebtn').click(function () {
+        var thisId = $(this).attr("id");
+        $("#dialog-confirm").html('<div><h6>Do you really want to delete it?</h6></div>').dialog({
+            resizable: false,
+            modal: true,
+            title: "Delete?",
+            height: 250,
+            width: 400,
+            buttons: {
+                "Yes": function () {
+                    $.get("/Admin/Transactions/DeleteTransaction", { id: thisId });
+                    setTimeout(function(){
+                        location.reload();
+                    }, 1000);
+                    $(this).dialog('close');
+                },
+                "No": function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
+    });
+    
+    $('.createbtn').click(function () {
+        $("#createdialog").dialog("open");
+    });
+</script>

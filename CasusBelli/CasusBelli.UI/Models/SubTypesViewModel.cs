@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -57,6 +58,24 @@ namespace CasusBelli.UI.Models
             ImageMimeData = productSubTypes.ImageMimeData;
 
             IsOutOfRange = !(myProducts.Count > 0);
+        }
+
+        public SubTypesViewModel(ProductSubType productSubTypes, List<Country> availableCountries)
+        {
+            AdditionalInfo = productSubTypes.AdditionalInfo;
+            AvailableTypes = new List<ProductType>();
+            AvailableCountries = availableCountries;
+            Photo = productSubTypes.Photo;
+            Price = productSubTypes.Price;
+            SubTypeId = productSubTypes.SubTypeId;
+            SubTypeName = productSubTypes.SubTypeName;
+            SubTypeText = productSubTypes.SubTypeText;
+            TypeId = productSubTypes.TypeId;
+            CountryId = productSubTypes.CountryId;
+            TypeName = "";
+            CountryName = availableCountries.First(p => p.CountryId == productSubTypes.CountryId).CountryName;
+            ImageData = productSubTypes.ImageData;
+            ImageMimeData = productSubTypes.ImageMimeData;
         }
     }
 }

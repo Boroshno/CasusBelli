@@ -25,30 +25,30 @@ namespace CasusBelli.UI.Controllers
             return View(s);
         }
 
-        public FileContentResult GetImageSubType(int SubTypeId)
-        {
-            ProductSubType prod = subTypeRepository.ProductSubTypes.FirstOrDefault(p => p.SubTypeId == SubTypeId);
-            if (prod != null)
-            {
-                return File(prod.ImageData, prod.ImageMimeData);
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //public FileContentResult GetImageSubType(int SubTypeId)
+        //{
+        //    ProductSubType prod = subTypeRepository.ProductSubTypes.FirstOrDefault(p => p.SubTypeId == SubTypeId);
+        //    if (prod != null)
+        //    {
+        //        return File(prod.ImageData, prod.ImageMimeData);
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
 
-        public FileContentResult GetImageType(int TypeId)
-        {
-            ProductType prod = typeRepository.Types.FirstOrDefault(p => p.TypeId == TypeId);
-            if (prod != null)
-            {
-                return File(prod.ImageData, prod.ImageMimeData);
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //public FileContentResult GetImageType(int TypeId)
+        //{
+        //    ProductType prod = typeRepository.Types.FirstOrDefault(p => p.TypeId == TypeId);
+        //    if (prod != null)
+        //    {
+        //        return File(prod.ImageData, prod.ImageMimeData);
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
     }
 }

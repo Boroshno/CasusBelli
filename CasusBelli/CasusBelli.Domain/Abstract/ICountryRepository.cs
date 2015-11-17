@@ -8,7 +8,7 @@ namespace CasusBelli.Domain.Abstract
 {
     public interface ICountryRepository
     {
-            IQueryable<Country> Countries { get; }
+            IEnumerable<Country> Countries { get; }
 
             void AddOrUpdateCountry(Country country);
 

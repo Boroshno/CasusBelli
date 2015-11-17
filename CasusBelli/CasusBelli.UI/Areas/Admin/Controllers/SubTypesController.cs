@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -32,9 +33,16 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
         {
             List<SubTypesViewModel> subtypes = new List<SubTypesViewModel>();
             var s = subTypeRepository.ProductSubTypes.ToList();
-            foreach (ProductSubType ps in subTypeRepository.ProductSubTypes)
+            foreach (ProductSubType ps in s)
             {
-                subtypes.Add(new SubTypesViewModel(ps, typeRepository.Types.ToList(), countryRepository.Countries.ToList(), productRepository.Products.Where(p => p.SubTypeId == ps.SubTypeId).ToList()));
+                var watch = Stopwatch.StartNew();
+                // the code that you want to measure comes here (Time measuring)
+
+                List<Country> countries = countryRepository.Countries.ToList();
+                watch.Stop();
+                var elapsedMs = watch.ElapsedMilliseconds;
+
+                subtypes.Add(new SubTypesViewModel(ps, countries));
             }
             return View(subtypes);
         }

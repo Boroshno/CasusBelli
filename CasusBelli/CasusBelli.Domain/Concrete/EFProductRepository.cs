@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,37 @@ using CasusBelli.Domain.Entities;
 
 namespace CasusBelli.Domain.Concrete
 {
-    public class EFProductRepository:IProductRepository
+    public class EFProductRepository:IProductRepository, ICacheableRepository
     {
+        public EFProductRepository() : this(new DefaultCasheProvider())
+        {
+            
+        }
+
+        public EFProductRepository(ICacheProvider cacheProvider)
+        {
+            this.Cache = cacheProvider;
+        }
+
         private EFDbContext context = new EFDbContext();
-        public IQueryable<Product> Products { get { return context.Products; } }
+        public ICacheProvider Cache { get; set; }
+
+        public IEnumerable<Product> Products
+        {
+            get
+            {
+                List<Product> productsData = Cache.Get("products") as List<Product>;
+                if (productsData == null)
+                {
+                    productsData = context.Products.SqlQuery("SELECT * FROM Products").ToList(); ;
+                    if (productsData.Any())
+                    {
+                        Cache.Set("products", productsData, 99999);
+                    }
+                }
+                return productsData;
+            }
+        }
 
         public void AddOrUpdateProduct(Product prod)
         {
@@ -32,12 +60,21 @@ namespace CasusBelli.Domain.Concrete
             };
             context.Products.AddOrUpdate(p => p.ProductId, efprod);
             context.SaveChanges();
+
+            ClearCache();
         }
 
         public void DeleteProduct(Product prod)
         {
             context.Products.Remove(prod);
             context.SaveChanges();
+
+            ClearCache();
+        }
+
+        public void ClearCache()
+        {
+            Cache.Invalidate("products");
         }
     }
 }

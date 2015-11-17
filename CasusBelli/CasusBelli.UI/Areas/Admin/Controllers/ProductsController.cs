@@ -53,7 +53,7 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult SoldProduct(int productid, int price, int count, int clientId)
+        public ActionResult SellProduct(int productid, int price, int count, int clientId)
         {
             int totalcount = count;
             List<AdminProductsListViewModel> productsVM = new List<AdminProductsListViewModel>();
@@ -97,18 +97,11 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
                 }
 
             }
-            Transaction lasttrans = transactionRepository.transactions.OrderByDescending(t => t.Date).First();
-            AdminProductsListViewModel newproduct = productsVM.First(x => x.ProductId == productid);
-            Transaction newtran = new Transaction
-            {
-                BecameMoney = lasttrans.BecameMoney + (price * totalcount),
-                ClientId = -1,
-                Currency = price * totalcount,
-                Date = DateTime.Now,
-                WasMoney = lasttrans.BecameMoney,
-                Text = "Продано " + totalcount + " " + newproduct.SubTypeName
-            };
-            transactionRepository.AddTransaction(newtran);
+            
+            AdminProductsListViewModel soldproduct = productsVM.First(x => x.ProductId == productid);
+            TransactionFunctions.WhenProductWasSold(transactionRepository, soldproduct.SubTypeName,
+                totalcount, price);
+
             return Redirect("/Admin/Products");
         }
 
@@ -140,32 +133,23 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
                     count--;
                 }
 
-                //Transaction lasttrans = transactionRepository.transactions.OrderByDescending(t => t.Date).First();
-                //Transaction newtran = new Transaction
-                //{
-                //    BecameMoney = lasttrans.BecameMoney + (newproduct.TradePrice * newproduct.Count),                        // Uncomment it it when all products will be in DB
-                //    ClientId = -1,
-                //    Currency = newproduct.TradePrice * newproduct.Count,
-                //    Date = DateTime.Now,
-                //    WasMoney = lasttrans.BecameMoney,
-                //    Text = "Закупка " + newproduct.subTypeName
-                //};
-                //transactionRepository.AddTransaction(newtran);
+                TransactionFunctions.WhenAddingNewProduct(transactionRepository, newproduct, newproduct.Count);
 
-                ProductsViewModel copiedproduct = new ProductsViewModel(new EFProductTypeRepository(),
-                new EFProductSubTypeRepository(), new EFCountryRepository());
-                copiedproduct.AdditionalInfo = newproduct.AdditionalInfo;
-                copiedproduct.Condition = newproduct.Condition;
-                copiedproduct.Count = newproduct.Count;
-                copiedproduct.CountryId = newproduct.CountryId;
-                copiedproduct.NATOSize = newproduct.NATOSize;
-                copiedproduct.Price = newproduct.Price;
-                copiedproduct.Size = newproduct.Size;
-                copiedproduct.SubTypeId = newproduct.SubTypeId;
-                copiedproduct.TradePrice = newproduct.TradePrice;
-                copiedproduct.TypeId = newproduct.TypeId;
-                copiedproduct.Status = "New product was successfuly created. Creating other new product...";
-                return View(copiedproduct);
+                //ProductsViewModel copiedproduct = new ProductsViewModel(new EFProductTypeRepository(),
+                //new EFProductSubTypeRepository(), new EFCountryRepository());
+                //copiedproduct.AdditionalInfo = newproduct.AdditionalInfo;
+                //copiedproduct.Condition = newproduct.Condition;
+                //copiedproduct.Count = newproduct.Count;
+                //copiedproduct.CountryId = newproduct.CountryId;
+                //copiedproduct.NATOSize = newproduct.NATOSize;
+                //copiedproduct.Price = newproduct.Price;
+                //copiedproduct.Size = newproduct.Size;
+                //copiedproduct.SubTypeId = newproduct.SubTypeId;
+                //copiedproduct.TradePrice = newproduct.TradePrice;
+                //copiedproduct.TypeId = newproduct.TypeId;
+                //copiedproduct.Status = "New product was successfuly created. Creating other new product...";
+                newproduct.Status = "New product was successfuly created. Creating other new product...";
+                return View(newproduct);
             }
             else
             {

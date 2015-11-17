@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using CasusBelli.Domain.Abstract;
 using CasusBelli.Domain.Entities;
 using CasusBelli.UI.Models;
+using Newtonsoft.Json;
 
 namespace CasusBelli.UI.Areas.Admin.Controllers
 {
@@ -21,7 +22,7 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
             clientRepository = clientRep;
         }
 
-        public ActionResult Index()
+        public ViewResult Index()
         {
             List<ClientsViewModel> clientsVM = new List<ClientsViewModel>();
             var clients = clientRepository.Clients.ToList();
@@ -34,7 +35,7 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
         }
 
 
-        public void CreateClient(string name, string phone, string email, string city, string NPOffice, string additionalInfo)
+        public ActionResult CreateClient(string name, string phone, string email, string city, string NPOffice, string additionalInfo)
         {
             if (ModelState.IsValid)
             {
@@ -48,11 +49,11 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
                 clientVM.NPOffice = np;
                 clientVM.AdditionalInfo = additionalInfo;
                 clientRepository.AddOrUpdateClient(clientVM);
-                //return Redirect("/Admin/Clients");
+                return RedirectToAction("Index");
             }
             else
             {
-                //return Redirect("/Admin/Clients");
+                return RedirectToAction("Index");
             }
         }
 
@@ -66,6 +67,32 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
             Client client = clientRepository.Clients.First(c => c.ClientId == id);
             clientRepository.DeleteClient(client);
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult EditClient(ClientsViewModel ClientsVM)
+        {
+            if (ModelState.IsValid)
+            {
+                Client client = clientRepository.Clients.First(c => c.ClientId == ClientsVM.ClientId);
+                client.AdditionalInfo = ClientsVM.AdditionalInfo;
+                client.City = ClientsVM.City;
+                client.Email = ClientsVM.Email;
+                client.NPOffice = ClientsVM.NPOffice;
+                client.Name = ClientsVM.Name;
+                client.Phone = ClientsVM.Phone;
+                clientRepository.AddOrUpdateClient(client);
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public string GetClientById(int id)
+        {
+            Client client = clientRepository.Clients.First(c => c.ClientId == id);
+            string jsonClient = JsonConvert.SerializeObject(client);
+            return jsonClient;
         }
     }
 }

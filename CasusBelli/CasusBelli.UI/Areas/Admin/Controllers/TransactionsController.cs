@@ -23,7 +23,7 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
             clientRepository = clientRep;
         }
 
-        public ActionResult Index()
+        public ViewResult Index()
         {
             List<TransactionsViewModel> transVM = new List<TransactionsViewModel>();
             var transactions = transactionRepository.transactions.ToList();
@@ -51,7 +51,15 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
                 newtran.WasMoney = lasttrans.BecameMoney;
                 transactionRepository.AddTransaction(newtran);
             }
-            return Redirect("/Admin/Transactions");
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteTransaction(int id)
+        {
+            Transaction trans = transactionRepository.transactions.First(t => t.TransactionId == id);
+            transactionRepository.DeleteTransaction(trans);
+            return RedirectToAction("Index");
         }
 
     }

@@ -46,6 +46,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
@@ -90,6 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IAuthProvider.cs" />
+    <Compile Include="Abstract\ICacheableRepository.cs" />
+    <Compile Include="Abstract\ICacheProvider.cs" />
     <Compile Include="Abstract\IClientRepository.cs" />
     <Compile Include="Abstract\ICountryRepository.cs" />
     <Compile Include="Abstract\IOrderProcessor.cs" />
@@ -98,6 +103,7 @@
     <Compile Include="Abstract\ISubTypeRepository.cs" />
     <Compile Include="Abstract\ITransactionRepository.cs" />
     <Compile Include="Abstract\ITypeRepository.cs" />
+    <Compile Include="Concrete\DefaultCasheProvider.cs" />
     <Compile Include="Concrete\EFClientRepository.cs" />
     <Compile Include="Concrete\EFCountryRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
@@ -116,10 +122,45 @@
     <Compile Include="Entities\ProductSubType.cs" />
     <Compile Include="Entities\ProductType.cs" />
     <Compile Include="Entities\Transaction.cs" />
+    <Compile Include="GetAllCountries.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetAllCountries.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllCountries.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetAllCountries.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllCountries.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetAllCountries.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllCountries_Result.cs">
+      <DependentUpon>GetAllCountries.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="GetAllCountries.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GetAllCountries.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="GetAllCountries.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GetAllCountries.edmx</DependentUpon>
+      <LastGenOutput>GetAllCountries.Context.cs</LastGenOutput>
+    </None>
+    <None Include="GetAllCountries.edmx.diagram">
+      <DependentUpon>GetAllCountries.edmx</DependentUpon>
+    </None>
+    <None Include="GetAllCountries.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GetAllCountries.edmx</DependentUpon>
+      <LastGenOutput>GetAllCountries.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
