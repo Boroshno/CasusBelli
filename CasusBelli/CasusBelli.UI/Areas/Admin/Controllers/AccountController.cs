@@ -15,6 +15,7 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
         public AccountController(IAuthProvider auth)
         {
             authProvider = auth;
+            //
         }
 
         
