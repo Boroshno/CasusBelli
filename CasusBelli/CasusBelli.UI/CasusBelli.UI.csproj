@@ -274,6 +274,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\tablesorter.js" />
+    <Content Include="Styles\AdminStyle.css" />
     <Content Include="Styles\Images\arrow.png" />
     <Content Include="Styles\Images\arrowleft.png" />
     <Content Include="Styles\Images\arrowright.png" />
@@ -296,6 +297,7 @@
     <Content Include="Styles\Images\SubTypes\shtan_bundes.jpg" />
     <Content Include="Styles\Images\ukraine.png" />
     <Content Include="Styles\Images\uniform.jpg" />
+    <Content Include="Styles\jquery.bxslider.css" />
     <Content Include="Styles\Style.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

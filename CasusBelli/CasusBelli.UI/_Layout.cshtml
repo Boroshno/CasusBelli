@@ -1,61 +1,52 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
 
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Casus Belli</title>
-    <link href="~/Styles/Style.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-</head>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Casus Belli</title>
+        <link href="~/Styles/Style.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="styles/jquery.bxslider.css" />
+        @Scripts.Render("~/bundles/jquery")
+        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+        <script type="text/javascript" src="Scripts/maphilight.js"></script>
+        <script type="text/javascript" src="Scripts/jquery.bxslider.js"></script>
+        <script type="text/javascript" src="Scripts/main.js"></script>
+        @RenderSection("Scripts", false)
+    </head>
     <body>
-        <div style="padding: 20px; background-color: #A4B49E;">
-            <div class="UpperLayoutPanel">
-                <a href="/Home"><div class="logo"></div></a>
-                <div class="menu">
+        <div id="all">
+            <header id="header">
+                <a href="/Home"><div id="logo"></div></a>
+                <nav>
                     <ul>
-                        <a href="/ProductsList">
-                            <li>КАТАЛОГ ТОВАРІВ</li>
-                        </a>
-                        <a href="/FAQ">
-                            <li>FAQ</li>
-                        </a>
-                        <a href="/Contacts">
-                            <li>КОНТАКТИ</li>
-                        </a>
+                        <li><a href='/ProductsList'>КАТАЛОГ ТОВАРІВ</a></li>
+                        <li><a href='/FAQ'>FAQ</a></li>
+                        <li><a href='/Contacts'>КОНТАКТИ</a></li>
                     </ul>
-                </div>
+                </nav>
+            </header>
+            <div>
+                @RenderBody()
             </div>
-        </div>
-        <div>
-            @RenderBody()
-        </div>
-        <div style="padding: 20px; background-color: #A4B49E;">
-            <div class="footerLayoutPage">
-                <div class="footermenu">
+            <footer>
+                <div id="footext">
                     <ul>
-                        <a href="/Home">
-                            <li>Головна</li>
-                        </a>
-                        <a href="/ProductsList">
-                            <li>Каталог Товарів</li>
-                        </a>
-                        <a href="/FAQ">
-                            <li>FAQ</li>
-                        </a>
-                        <a href="/Contacts">
-                            <li>Контакти</li>
-                        </a>
+                        <li><a href='/Home'>ГОЛОВНА</a></li>
+                        <li><a href='/ProductsList'>СПИСОК ТОВАРІВ</a></li>
+                        <li><a href='/FAQ'>FAQ</a></li>
+                        <li><a href='/Contacts'>КОНТАКТИ</a></li>
                     </ul>
                 </div>
-                <div class="footercontact">
-                    <ul>
-                        <li>+38(093)5535511</li>
-                        <li>+38(050)7863461</li>
-                        <li>admin@casusbelli.com.ua</li>
-                    </ul>
+                <div id="contacts">
+                    <div class="phone">+38(093)55 355 11</div>
+                    <div class="phone">+38(050)78 634 61</div>
+                    <div>
+                        Admin@casusbelli.com.ua
+                    </div>
                 </div>
-            </div>
+            </footer>
         </div>
-    </body>
+</body>
 </html>

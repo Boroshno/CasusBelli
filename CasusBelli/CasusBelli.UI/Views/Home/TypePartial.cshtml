@@ -1,8 +1,8 @@
 ﻿@model CasusBelli.Domain.Entities.ProductType
 
-    @if ((Model.TypeId%2) == 0)
-    {
-      <div>
+    @*@if ((Model.TypeId%2) == 0)
+    {*@
+      @*<div>
           <div class="typeimage" style="padding-right: 18%; float: right;">
               <a href="~/ProductsList?TypeId=@Model.TypeId">
                   <img src="@Model.Photo" />
@@ -14,8 +14,8 @@
                   <span style="color: #C6E0BC;">@Model.TypeName</span>
               </a>
           </div>
-    </div>
-    }
+    </div>*@
+    @*}
     else
     {
         <div>
@@ -31,4 +31,16 @@
             </a>
             </div>
         </div>
-    }
+    }*@
+
+<div class="productcontent">
+    <a href="~/ProductsList?TypeId=@Model.TypeId">
+        <div class="productimage" style="background: url('@Model.Photo') no-repeat scroll center / 73% transparent"></div>
+    </a>
+    <div class="productname"><a href='~/ProductsList?TypeId=@Model.TypeId'>@Model.TypeName</a></div>
+    @*<div class="productsubtype">
+        <div class="productname"><a href='404.html'>БЕРГЕН</a></div>
+        <div class="productname"><a href='404.html'>ТАКТИЧНИЙ ДПМ</a></div>
+        <div class="productname"><a href='404.html'>ТАКТИЧНИЙ ЧОРНИЙ</a></div>
+    </div>*@
+</div>
