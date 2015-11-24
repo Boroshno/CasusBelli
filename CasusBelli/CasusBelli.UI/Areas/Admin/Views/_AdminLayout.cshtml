@@ -6,8 +6,8 @@
         @RenderSection("head", required: false)
         <title>Casus Belli Admin</title>
         <link href="~/Styles/Style.css" rel="stylesheet" />
-        <script src="~/Scripts/jquery-2.1.1.min.js"></script>
         <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+        @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/adminScript")
         @Scripts.Render("~/bundles/jqueryui")
         @Styles.Render("~/Content/themes/base/css")
