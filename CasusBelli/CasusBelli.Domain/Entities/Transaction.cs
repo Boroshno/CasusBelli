@@ -27,7 +27,7 @@ namespace CasusBelli.Domain.Entities
 
     public static class TransactionFunctions
     {
-        public static void WhenAddingNewProduct(ITransactionRepository transactionRepository, Product newproduct, int count)
+        public static void WhenAddingNewProduct(ITransactionRepository transactionRepository, Product newproduct, int count, string subTypeName)
         {
             Transaction lasttrans = transactionRepository.transactions.OrderByDescending(t => t.Date).First();
             Transaction newtran = new Transaction
@@ -37,19 +37,19 @@ namespace CasusBelli.Domain.Entities
                 Currency = newproduct.TradePrice * count,
                 Date = DateTime.Now,
                 WasMoney = lasttrans.BecameMoney,
-                Text = "Закупка " + count
+                Text = "Закупка " + count + " " + subTypeName
             };
             transactionRepository.AddTransaction(newtran);
         }
 
         public static void WhenProductWasSold(ITransactionRepository transactionRepository, string subTypeName,
-            int count, int price)
+            int count, int price, int clientId)
         {
             Transaction lasttrans = transactionRepository.transactions.OrderByDescending(t => t.Date).First();
             Transaction newtran = new Transaction
             {
                 BecameMoney = lasttrans.BecameMoney + (price * count),
-                ClientId = -1,
+                ClientId = clientId,
                 Currency = price * count,
                 Date = DateTime.Now,
                 WasMoney = lasttrans.BecameMoney,

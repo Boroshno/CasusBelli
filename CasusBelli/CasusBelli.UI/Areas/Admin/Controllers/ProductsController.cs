@@ -100,7 +100,7 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
             
             AdminProductsListViewModel soldproduct = productsVM.First(x => x.ProductId == productid);
             TransactionFunctions.WhenProductWasSold(transactionRepository, soldproduct.SubTypeName,
-                totalcount, price);
+                totalcount, price, clientId);
 
             return Redirect("/Admin/Products");
         }
@@ -133,23 +133,23 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
                     count--;
                 }
 
-                TransactionFunctions.WhenAddingNewProduct(transactionRepository, newproduct, newproduct.Count);
+                TransactionFunctions.WhenAddingNewProduct(transactionRepository, newproduct, newproduct.Count, newproduct.subTypeName);
 
-                //ProductsViewModel copiedproduct = new ProductsViewModel(new EFProductTypeRepository(),
-                //new EFProductSubTypeRepository(), new EFCountryRepository());
-                //copiedproduct.AdditionalInfo = newproduct.AdditionalInfo;
-                //copiedproduct.Condition = newproduct.Condition;
-                //copiedproduct.Count = newproduct.Count;
-                //copiedproduct.CountryId = newproduct.CountryId;
-                //copiedproduct.NATOSize = newproduct.NATOSize;
-                //copiedproduct.Price = newproduct.Price;
-                //copiedproduct.Size = newproduct.Size;
-                //copiedproduct.SubTypeId = newproduct.SubTypeId;
-                //copiedproduct.TradePrice = newproduct.TradePrice;
-                //copiedproduct.TypeId = newproduct.TypeId;
-                //copiedproduct.Status = "New product was successfuly created. Creating other new product...";
-                newproduct.Status = "New product was successfuly created. Creating other new product...";
-                return View(newproduct);
+                ProductsViewModel copiedproduct = new ProductsViewModel(new EFProductTypeRepository(),
+                new EFProductSubTypeRepository(), new EFCountryRepository());
+                copiedproduct.AdditionalInfo = newproduct.AdditionalInfo;
+                copiedproduct.Condition = newproduct.Condition;
+                copiedproduct.Count = newproduct.Count;
+                copiedproduct.CountryId = newproduct.CountryId;
+                copiedproduct.NATOSize = newproduct.NATOSize;
+                copiedproduct.Price = newproduct.Price;
+                copiedproduct.Size = newproduct.Size;
+                copiedproduct.SubTypeId = newproduct.SubTypeId;
+                copiedproduct.TradePrice = newproduct.TradePrice;
+                copiedproduct.TypeId = newproduct.TypeId;
+                copiedproduct.Status = "New product was successfuly created. Creating other new product...";
+                //newproduct.Status = "New product was successfuly created. Creating other new product...";
+                return View(copiedproduct);
             }
             else
             {

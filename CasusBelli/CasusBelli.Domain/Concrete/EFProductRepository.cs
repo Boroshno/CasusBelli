@@ -66,7 +66,8 @@ namespace CasusBelli.Domain.Concrete
 
         public void DeleteProduct(Product prod)
         {
-            context.Products.Remove(prod);
+            Product deltedProduct = context.Products.First(p => p.ProductId == prod.ProductId);
+            context.Products.Remove(deltedProduct);
             context.SaveChanges();
 
             ClearCache();

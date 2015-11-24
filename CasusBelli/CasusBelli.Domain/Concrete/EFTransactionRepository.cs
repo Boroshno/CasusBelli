@@ -57,7 +57,8 @@ namespace CasusBelli.Domain.Concrete
 
         public void DeleteTransaction(Transaction transaction)
         {
-            context.Transactions.Remove(transaction);
+            Transaction deletedTran = context.Transactions.First(t => t.TransactionId == transaction.TransactionId);
+            context.Transactions.Remove(deletedTran);
             context.SaveChanges();
 
             ClearCache();
@@ -65,7 +66,7 @@ namespace CasusBelli.Domain.Concrete
 
         public void ClearCache()
         {
-            Cache.Invalidate("clients");
+            Cache.Invalidate("transactions");
         }
     }
 }
