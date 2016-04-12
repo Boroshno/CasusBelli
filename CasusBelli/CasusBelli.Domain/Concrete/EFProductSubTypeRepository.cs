@@ -28,7 +28,7 @@ namespace CasusBelli.Domain.Concrete
         {
             get
             {
-                List<ProductSubType> subtypesData = Cache.Get("subtypes") as List<ProductSubType>;
+                List<ProductSubType> subtypesData = null;// Cache.Get("subtypes") as List<ProductSubType>;
                 if (subtypesData == null)
                 {
                     subtypesData = context.SubTypes.SqlQuery("SELECT * FROM ProductSubTypes").ToList(); ;

@@ -29,10 +29,10 @@ namespace CasusBelli.Domain.Entities
     {
         public static void WhenAddingNewProduct(ITransactionRepository transactionRepository, Product newproduct, int count, string subTypeName)
         {
-            Transaction lasttrans = transactionRepository.transactions.OrderByDescending(t => t.Date).First();
+            Transaction lasttrans = transactionRepository.transactions.OrderByDescending(t => t.TransactionId).First();
             Transaction newtran = new Transaction
             {
-                BecameMoney = lasttrans.BecameMoney + (newproduct.TradePrice * count),                        
+                BecameMoney = lasttrans.BecameMoney - (newproduct.TradePrice * count),                        
                 ClientId = -1,
                 Currency = newproduct.TradePrice * count,
                 Date = DateTime.Now,
@@ -45,7 +45,7 @@ namespace CasusBelli.Domain.Entities
         public static void WhenProductWasSold(ITransactionRepository transactionRepository, string subTypeName,
             int count, int price, int clientId)
         {
-            Transaction lasttrans = transactionRepository.transactions.OrderByDescending(t => t.Date).First();
+            Transaction lasttrans = transactionRepository.transactions.OrderByDescending(t => t.TransactionId).First();
             Transaction newtran = new Transaction
             {
                 BecameMoney = lasttrans.BecameMoney + (price * count),

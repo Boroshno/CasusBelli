@@ -31,7 +31,7 @@ namespace CasusBelli.Domain.Concrete
             {
 
                 context.Configuration.ProxyCreationEnabled = false;
-                List<Country> countriesData = Cache.Get("countries") as List<Country>;
+                List<Country> countriesData = null;// Cache.Get("countries") as List<Country>;
                 if (countriesData == null)
                 {
                     countriesData = context.Country.SqlQuery("SELECT * FROM Countries").ToList();

@@ -133,6 +133,8 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
                     count--;
                 }
 
+                var subtypes = subTypeRepository.ProductSubTypes.ToList();
+                newproduct.subTypeName = subtypes.First(x => x.SubTypeId == newproduct.SubTypeId).SubTypeName;
                 TransactionFunctions.WhenAddingNewProduct(transactionRepository, newproduct, newproduct.Count, newproduct.subTypeName);
 
                 ProductsViewModel copiedproduct = new ProductsViewModel(new EFProductTypeRepository(),
