@@ -1,0 +1,116 @@
+﻿@model IEnumerable<CasusBelli.UI.Models.WebLinkViewModel>
+
+@{
+    ViewBag.Title = "WebLink";
+    Layout = "~/Areas/Admin/Views/_AdminLayout.cshtml";
+}
+
+<fieldset>
+    <h2>Web links</h2>
+
+    <p>
+        <text><a class="createbtn">Create new</a></text>
+    </p>
+
+    <table border="1">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdditionalInfo)
+        </th>
+        <th></th>
+        <th></th>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a href="@Html.DisplayFor(modelItem => item.URL)">@Html.DisplayFor(modelItem => item.URL)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Login)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdditionalInfo)
+                </td>
+                <td>
+                    <text><a class="editbtn" id="@item.Id">Edit</a></text>
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteWebLink", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+
+</fieldset>
+
+<div id="createdialog" title="Create web link" class="modal-dialog">
+    <form action="/Admin/Clients/CreateWebLink" method="POST">
+        Name <br />
+        <input type="text" name="name" id="Name" /> <br />
+        URL <br />
+        <input type="text" name="url" id="URL" /><br />
+        Login <br />
+        <input type="text" name="login" id="Login" /><br />
+        Password <br />
+        <input type="text" name="password" id="Password" /><br />
+        Additional Info <br />
+        <input type="text" name="AdditionalInfo" id="AdditionalInfo" /><br />
+        <button>Create</button>
+    </form>
+</div>
+
+<div id="editdialog" title="Edit web link" class="modal-dialog">
+    <form action="/Admin/WebLink/EditWebLink" method="POST">
+        <input type="hidden" name="Id" id="EditId" />
+        Name <br />
+        <input type="text" name="name" id="EditName" /> <br />
+        URL <br />
+        <input type="text" name="url" id="EditURL" /><br />
+        Login <br />
+        <input type="text" name="login" id="EditLogin" /><br />
+        Password <br />
+        <input type="text" name="city" id="EditPassword" /><br />
+        Additional Info <br />
+        <textarea name="AdditionalInfo" id="EditAdditionalInfo" ></textarea><br />
+        <button>Save</button>
+    </form>
+</div>
+
+<script type="text/jscript">
+
+    $('.createbtn').click(function () {
+        $("#createdialog").dialog("open");
+    });
+
+    $('.editbtn').click(function () {
+        var thisId = $(this).attr("id");
+        $.get("/Admin/WebLink/GetWebLinkById", {id:thisId}, function (data) {
+            var link = $.parseJSON(data);
+            $('#EditId').val(link.Id);
+            $("#EditName").val(link.Name);
+            $("#EditURL").val(link.URL);
+            $("#EditLogin").val(link.Login);
+            $("#EditPassword").val(link.Password);
+            $("#EditAdditionalInfo").val(link.AdditionalInfo);
+        })
+        $("#editdialog").dialog("open");
+    });
+</script>

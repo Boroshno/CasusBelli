@@ -129,6 +129,7 @@
     <Compile Include="AdminSubTypeTest.cs" />
     <Compile Include="AdminTransactionTest.cs" />
     <Compile Include="AdminTypesTest.cs" />
+    <Compile Include="AdminWebLinkTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

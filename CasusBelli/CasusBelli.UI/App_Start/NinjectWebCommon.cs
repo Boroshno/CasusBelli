@@ -59,6 +59,7 @@ namespace CasusBelli.UI
                 kernel.Bind<IProductStatusRepository>().To<EFProductStatusRepository>();
                 kernel.Bind<IClientRepository>().To<EFClientRepository>();
                 kernel.Bind<ITransactionRepository>().To<EFTransactionRepository>();
+                kernel.Bind<IWebLinkRepository>().To<EFWebLinkRepository>();
                 //kernel.Bind<ITaskDateTypeRepository>().To<EFTaskDateTypeRepository>();
                 //kernel.Bind<ITaskStatusRepository>().To<EFTaskStatusRepository>();
                 //kernel.Bind<ITaskRepository>().To<EFTaskRepository>();

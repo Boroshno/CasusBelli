@@ -58,6 +58,11 @@ img {
     width: 100%;
 }
 
+textarea {
+    width: 275px;
+    height: 185px;
+}
+
 /*           EditFOrModel CSS              */
 
 .editor-field {

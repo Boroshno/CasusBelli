@@ -167,6 +167,7 @@
     <Compile Include="Areas\Admin\Controllers\SubTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\TransactionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TypesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WebLinkController.cs" />
     <Compile Include="Areas\Admin\Views\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\IndexController.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Models\ProductsViewModel.cs" />
     <Compile Include="Models\SubTypesViewModel.cs" />
     <Compile Include="Models\TransactionsViewModel.cs" />
+    <Compile Include="Models\WebLinkViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +257,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Areas\Admin\Views\WebLink\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CasusBelliLive.pubxml" />
     <Content Include="Scripts\AdminScripts.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
@@ -320,7 +323,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Infrastructure\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
