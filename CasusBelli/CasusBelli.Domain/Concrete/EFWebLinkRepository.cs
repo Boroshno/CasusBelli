@@ -32,7 +32,7 @@ namespace CasusBelli.Domain.Concrete
                 List<WebLink> linksData = Cache.Get("weblinks") as List<WebLink>;
                 if (linksData == null)
                 {
-                    linksData = context.WebLink.SqlQuery("SELECT * FROM WebLink").ToList();
+                    linksData = context.WebLink.SqlQuery("SELECT * FROM WebLinks").ToList();
                     if (linksData.Any())
                     {
                         Cache.Set("weblinks", linksData, 99999);
@@ -59,7 +59,7 @@ namespace CasusBelli.Domain.Concrete
 
         public void DeleteWebLink(WebLink link)
         {
-            context.WebLink.Remove(link);
+            context.WebLink.Remove(context.WebLink.First(c => c.Id == link.Id));
             context.SaveChanges();
 
             ClearCache();

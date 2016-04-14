@@ -60,7 +60,7 @@ namespace CasusBelli.Domain.Concrete
 
         public void DeleteClient(Client client)
         {
-            context.Clients.Remove(client);
+            context.Clients.Remove(context.Clients.First(c => c.ClientId == client.ClientId));
             context.SaveChanges();
 
             ClearCache();

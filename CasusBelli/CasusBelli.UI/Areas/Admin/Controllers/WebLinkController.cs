@@ -69,9 +69,9 @@ namespace CasusBelli.UI.Areas.Admin.Controllers
                 WebLink weblink = webLinkRepository.WebLink.First(c => c.Id == weblinkVM.Id);
                 weblink.AdditionalInfo = weblinkVM.AdditionalInfo;
                 weblink.Name = weblinkVM.Name;
-                weblink.URL = weblink.URL;
-                weblink.Login = weblink.Login;
-                weblink.Password = weblink.Password;
+                weblink.URL = weblinkVM.URL;
+                weblink.Login = weblinkVM.Login;
+                weblink.Password = weblinkVM.Password;
                 webLinkRepository.AddOrUpdateWebLink(weblink);
                 return RedirectToAction("Index");
             }
